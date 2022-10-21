@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
+  - component: {fileID: 759190116394466314}
   m_Layer: 0
   m_Name: sink01_tap
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &759190116394466314
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05901003, y: 0.10074235, z: 0.13841267}
+  m_Center: {x: 0.008397856, y: 0.03592826, z: 0.062241383}
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +108,7 @@ GameObject:
   - component: {fileID: 400002}
   - component: {fileID: 3300002}
   - component: {fileID: 2300002}
+  - component: {fileID: 6729814994760509023}
   m_Layer: 0
   m_Name: sink01_tap
   m_TagString: Untagged
@@ -166,6 +181,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6729814994760509023
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05901003, y: 0.10074235, z: 0.13841267}
+  m_Center: {x: 0.008397856, y: 0.03592826, z: 0.062241383}
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +205,7 @@ GameObject:
   - component: {fileID: 400004}
   - component: {fileID: 3300004}
   - component: {fileID: 2300004}
+  - component: {fileID: 2737625426970745547}
   m_Layer: 0
   m_Name: sink01_tap
   m_TagString: Untagged
@@ -249,6 +278,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2737625426970745547
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05901003, y: 0.10074235, z: 0.13841267}
+  m_Center: {x: 0.008397856, y: 0.03592826, z: 0.062241383}
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +302,7 @@ GameObject:
   - component: {fileID: 400006}
   - component: {fileID: 3300006}
   - component: {fileID: 2300006}
+  - component: {fileID: 5468244820866245196}
   m_Layer: 0
   m_Name: sink01_tap
   m_TagString: Untagged
@@ -332,6 +375,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5468244820866245196
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100006}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05901003, y: 0.10074235, z: 0.13841267}
+  m_Center: {x: 0.008397856, y: 0.03592826, z: 0.062241383}
 --- !u!1 &100008
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +439,7 @@ GameObject:
   - component: {fileID: 400010}
   - component: {fileID: 3300008}
   - component: {fileID: 2300008}
+  - component: {fileID: 873318051878742338}
   m_Layer: 0
   m_Name: sink01_wall3
   m_TagString: Untagged
@@ -455,6 +512,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &873318051878742338
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100010}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4319015, y: 0.38774577, z: 0.41825697}
+  m_Center: {x: -0.00002670288, y: 0.19409163, z: -0.07099222}
 --- !u!1 &100012
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +536,7 @@ GameObject:
   - component: {fileID: 400012}
   - component: {fileID: 3300010}
   - component: {fileID: 2300010}
+  - component: {fileID: 3721619306995258736}
   m_Layer: 0
   m_Name: sink01_wall1
   m_TagString: Untagged
@@ -538,6 +609,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3721619306995258736
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4319026, y: 1.0179998, z: 0.032770816}
+  m_Center: {x: -0.000026702894, y: 0.50921863, z: 0.002472714}
 --- !u!1 &100014
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,6 +633,7 @@ GameObject:
   - component: {fileID: 400014}
   - component: {fileID: 3300012}
   - component: {fileID: 2300012}
+  - component: {fileID: 3658118698216865930}
   m_Layer: 0
   m_Name: sink01_wall1_2
   m_TagString: Untagged
@@ -621,6 +706,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3658118698216865930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100014}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4319015, y: 1.0179995, z: 0.032770492}
+  m_Center: {x: -0.00002670288, y: 0.5092185, z: 0.002474525}
 --- !u!1 &100016
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +730,7 @@ GameObject:
   - component: {fileID: 400016}
   - component: {fileID: 3300014}
   - component: {fileID: 2300014}
+  - component: {fileID: 2729621194858835027}
   m_Layer: 0
   m_Name: sink01_1
   m_TagString: Untagged
@@ -704,6 +803,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2729621194858835027
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100016}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4319015, y: 0.31460795, z: 0.55287397}
+  m_Center: {x: -0.00002670288, y: 0.15707467, z: -0.000068202615}
 --- !u!1 &100018
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,6 +827,7 @@ GameObject:
   - component: {fileID: 400018}
   - component: {fileID: 3300016}
   - component: {fileID: 2300016}
+  - component: {fileID: 455786477289760801}
   m_Layer: 0
   m_Name: sink01_tap
   m_TagString: Untagged
@@ -787,3 +900,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &455786477289760801
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05901003, y: 0.10074235, z: 0.13841267}
+  m_Center: {x: 0.008397856, y: 0.03592826, z: 0.062241383}
