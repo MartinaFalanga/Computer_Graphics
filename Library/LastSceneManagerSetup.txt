@@ -1,5 +1,0 @@
-sceneSetups:
-- path: Assets/JP_School corridor/Scene/School Corridor.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
