@@ -6,7 +6,7 @@ class CharacterMotorSliding {
 	public bool  enabled = true;
 	
 	// How fast does the character slide on steep surfaces?
-	public float slidingSpeed = 15;
+	public float slidingSpeed = 3;
 	
 	// How much can the player control the sliding direction?
 	// If the value is 0.5f the player can slide sideways with half the speed of the downwards sliding speed.
@@ -14,5 +14,5 @@ class CharacterMotorSliding {
 	
 	// How much can the player influence the sliding speed?
 	// If the value is 0.5f the player can speed the sliding up to 150% or slow it down to 50%.
-	public float speedControl = 0.4f;
+	public float speedControl = 0.1f;
 }
