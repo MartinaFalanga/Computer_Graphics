@@ -20,6 +20,8 @@ public class CharacterMotor : MonoBehaviour {
     //@System.NonSerialized
     public bool inputJump = false;
 
+    public float speedFactor = 2;
+
     CharacterMotorMovement movement = new CharacterMotorMovement();
 
     CharacterMotorJumping jumping = new CharacterMotorJumping();
@@ -373,7 +375,7 @@ public class CharacterMotor : MonoBehaviour {
             float movementSlopeAngle= Mathf.Asin(movement.velocity.normalized.y)  * Mathf.Rad2Deg;
             maxSpeed *= movement.slopeSpeedMultiplier.Evaluate(movementSlopeAngle);
         }
-        return tr.TransformDirection(desiredLocalDirection * maxSpeed);
+        return tr.TransformDirection(desiredLocalDirection * maxSpeed * speedFactor);
     }
 
     private Vector3 AdjustGroundVelocityToNormal ( Vector3 hVelocity ,   Vector3 groundNormal  ){
