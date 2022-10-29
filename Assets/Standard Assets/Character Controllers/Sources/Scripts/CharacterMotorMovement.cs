@@ -3,9 +3,9 @@ using System.Collections;
 
 class CharacterMotorMovement {
 	// The maximum horizontal speed when moving
-	public float maxForwardSpeed = 10.0f;
-	public float maxSidewaysSpeed = 10.0f;
-	public float maxBackwardsSpeed = 10.0f;
+	public float maxForwardSpeed = 2f;
+	public float maxSidewaysSpeed = 2f;
+	public float maxBackwardsSpeed = 2f;
 	
 	// Curve for multiplying speed based on slope (negative = downwards)
 	public AnimationCurve slopeSpeedMultiplier = new AnimationCurve(new Keyframe(-90, 1), new Keyframe(0, 1), new Keyframe(90, 0));
