@@ -4,7 +4,7 @@ using System.Collections;
 public class CharacterMotor : MonoBehaviour {
 
     // Does this script currently respond to input?
-    bool  canControl = true;
+    public bool canControl = true;
 
     bool  useFixedUpdate = true;
 

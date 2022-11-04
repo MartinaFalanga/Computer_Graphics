@@ -12,12 +12,12 @@ TagManager:
   - Water
   - UI
   - post processing
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - GroundLayer
+  - UndergroundLayer
+  - StairsUnderground
+  - StairsGround
+  - Extremes
+  - Menus
   - 
   - 
   - 
