@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OpenCloseController : MonoBehaviour
@@ -7,6 +6,7 @@ public class OpenCloseController : MonoBehaviour
 
     public float speed = 1;
 
+    public DoorType doorType;
     public GameObject otherDoorCollider;
     public bool isOpen = false;
     [SerializeField] private bool pauseInteraction = false;
@@ -29,9 +29,24 @@ public class OpenCloseController : MonoBehaviour
                     otherAnim.SetTrigger("OpenClose");
                 }
 
-                int randomClipNumber = Random.Range(1, 3);
-                string clipName = isOpen ? "openDoor" + randomClipNumber : "autoCloseDoor";
-                FindObjectOfType<AudioManager>().PlayDelayed(clipName, isOpen ? 0 : .9f / speed);
+                string clipName;
+                switch (doorType)
+                {
+                    case DoorType.Door: 
+                        int randomClipNumber = Random.Range(1, 3);
+                        clipName = isOpen ? "openDoor" + randomClipNumber : "autoCloseDoor";
+                        FindObjectOfType<AudioManager>().PlayDelayed(clipName, isOpen ? 0 : .9f / speed);
+                        break;
+                    case DoorType.Window:
+                        FindObjectOfType<AudioManager>().PlayDelayed("openSliding", .2f / speed);
+                        break;
+                    case DoorType.Cabinet:
+                        clipName = isOpen ? "openCabinet" : "closeCabinet";
+                        FindObjectOfType<AudioManager>().PlayDelayed(clipName, isOpen ? 0 : .9f / speed);
+                        break;
+                    default: break;
+                }
+                
                 yield return new WaitForSeconds(1 / speed);
                 pauseInteraction = false;
             }
