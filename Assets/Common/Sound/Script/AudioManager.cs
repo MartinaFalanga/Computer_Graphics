@@ -6,8 +6,12 @@ public class AudioManager : MonoBehaviour
 {
 
     public Sound[] sounds;
+    public AudioMixer audioMixer;
+
 
     public static AudioManager instance;
+
+    private float volume;
 
     void Awake()
     {
@@ -40,5 +44,10 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.PlayDelayed(delay);
+    }
+
+    public void SetVolume(float volume)
+    {
+        audioMixer.SetFloat("volume", volume);
     }
 }
