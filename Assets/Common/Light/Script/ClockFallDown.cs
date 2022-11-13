@@ -13,7 +13,7 @@ public class ClockFallDown : MonoBehaviour
     RaycastHit hit;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetButtonDown("Fire1"))
         {
             Transform cam = Camera.main.transform;
             if (Physics.Raycast(cam.position, cam.forward, out hit, Mathf.Infinity, ~0))
