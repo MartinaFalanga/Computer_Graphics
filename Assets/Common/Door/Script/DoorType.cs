@@ -6,5 +6,5 @@ public enum DoorType
 {
     Door,
     Window,
-    Cabinet
+    Locker
 }
