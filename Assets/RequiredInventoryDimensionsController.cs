@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*  Script che serve per impostare l'angolazione e il local scale del 
+    singolo oggetto "sbloccatore" quando appare a schermo 
+    
+    **/
 public class RequiredInventoryDimensionsController : MonoBehaviour
 {
-
-    public float xAngle;
-    public float yAngle;
-    public float zAngle;
-
-    public float xScale;
-    public float yScale;
-    public float zScale;
+    public Vector3 angle;
+    public Vector3 scale;
 
 }

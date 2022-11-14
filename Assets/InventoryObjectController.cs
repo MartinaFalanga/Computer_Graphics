@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class InventoryObjectController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Vector3 angle;
+    public Vector3 scale;
 
+    /* private methods */
     private IEnumerator OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
@@ -25,10 +18,14 @@ public class InventoryObjectController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F)) {
                 // put this object into player inventory if not locked
-                if(gameObject.GetComponent<InteractiveObjectsController>().isLocked == false)
+                if(gameObject.GetComponent<CatchableObjectsController>().isLocked == false) {
                     inventory.GetComponent<InventoryController>().AddGameObject(gameObject);
+                }
             }
         }
         yield return new WaitForSeconds(1);
-    }   
+    }
+
+    
+
 }

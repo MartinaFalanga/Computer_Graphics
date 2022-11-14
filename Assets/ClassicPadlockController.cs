@@ -6,8 +6,7 @@ public class ClassicPadlockController : MonoBehaviour
 {
     private GameObject lockedGameObject;
 
-    private GameObject goRequiredInventoryObj1;
-    private GameObject goRequiredInventoryObj2;
+    private GameObject[] goRequiredInventoryObj;
 
     // Start is called before the first frame update
     void Start()
@@ -20,26 +19,29 @@ public class ClassicPadlockController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            Debug.Log("Dismissing padlock menu");
             gameObject.transform.parent.gameObject.SetActive(false);
+            GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().canControl = true;
         }
     }
 
     public void setActualGameObject(GameObject go) {
         this.lockedGameObject = go;
-
-        GameObject goRequiredInventory = go.GetComponent<LockedDoorController>().requiredInventory;
-        goRequiredInventoryObj1 = Instantiate(goRequiredInventory.transform.GetChild(0).gameObject);
-        goRequiredInventoryObj2 = Instantiate(goRequiredInventory.transform.GetChild(1).gameObject); 
-
         GameObject padlockMenuBar = GameObject.Find("InventoryRequiredBar").gameObject;
 
-        goRequiredInventoryObj1.transform.SetParent(padlockMenuBar.transform.GetChild(0));
-        goRequiredInventoryObj2.transform.SetParent(padlockMenuBar.transform.GetChild(1));
+        GameObject goRequiredInventory = go.GetComponent<LockedDoorController>().requiredInventory;
+        goRequiredInventoryObj = new GameObject[goRequiredInventory.transform.childCount];
 
-        goRequiredInventoryObj1.transform.localPosition = new Vector3(0,0,0);
-        goRequiredInventoryObj1.layer = 12;
-        goRequiredInventoryObj2.transform.localPosition = new Vector3(0,0,0);
-        goRequiredInventoryObj2.layer = 12;
+        int i = 0;
+        foreach(Transform goRequiredInventoryChild in goRequiredInventory.transform) {
+            goRequiredInventoryObj[i] = Instantiate(goRequiredInventoryChild.gameObject);
+            goRequiredInventoryObj[i].transform.SetParent(padlockMenuBar.transform.GetChild(i));
+            goRequiredInventoryObj[i].transform.localPosition = new Vector3(0,0,0);
+            goRequiredInventoryObj[i].transform.localScale = goRequiredInventoryObj[i].GetComponent<RequiredInventoryDimensionsController>().scale;
+            goRequiredInventoryObj[i].transform.eulerAngles = goRequiredInventoryObj[i].GetComponent<RequiredInventoryDimensionsController>().angle;
+            goRequiredInventoryObj[i].layer = 12;
+            i++;
+        }
     }
 
     public bool isInventoryValid() {
@@ -48,8 +50,11 @@ public class ClassicPadlockController : MonoBehaviour
 
         GameObject[] requiredInventoryObjects = new GameObject[2];
 
-        requiredInventoryObjects[0] = goRequiredInventoryObj1;
-        requiredInventoryObjects[1] = goRequiredInventoryObj2;
+        int i = 0;
+        foreach(GameObject go in goRequiredInventoryObj) {
+            requiredInventoryObjects[i] = go;
+            i++;
+        }
         
         foreach(GameObject requiredObject in requiredInventoryObjects) {
             bool isInInventory = false;
