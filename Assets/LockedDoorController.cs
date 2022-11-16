@@ -55,7 +55,7 @@ public class LockedDoorController : MonoBehaviour
         //GameObject.Find("First Person Controller").GetComponent<MouseLook>().canControl = true;
 
         foreach(GameObject unlockableObject in unlockableObjects) {
-            unlockableObject.GetComponent<InteractiveObjectsController>().unLock();
+            unlockableObject.GetComponent<CatchableObjectsController>().unLock();
         }
 
         gameObject.GetComponent<OpenCloseController>().unLock();
