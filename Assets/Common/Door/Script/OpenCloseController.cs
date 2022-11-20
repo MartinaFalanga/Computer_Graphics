@@ -75,10 +75,20 @@ public class OpenCloseController : MonoBehaviour
                 break;
             default: break;
         }
+
+        if(isOpen) {
+            changeInteractionMenuText("F: Close");
+        } else {
+            changeInteractionMenuText("F: Open");
+        }
     }
 
     private void showPadlock() {
         gameObject.GetComponent<LockedDoorController>().showPadlock();
+    }
+
+    private void changeInteractionMenuText(string text) {
+        gameObject.GetComponent<InteractiveObjectController>().interactionMenuText = text;
     }
 
 }
