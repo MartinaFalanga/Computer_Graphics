@@ -1,0 +1,3 @@
+interface IInteractiveObject {
+    void ExecuteLogic();
+}

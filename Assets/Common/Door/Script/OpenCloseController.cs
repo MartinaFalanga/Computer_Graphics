@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class OpenCloseController : MonoBehaviour
+public class OpenCloseController : MonoBehaviour, IInteractiveObject
 {
 
     public float speed = 1;
@@ -19,25 +19,18 @@ public class OpenCloseController : MonoBehaviour
         otherAnim = otherDoorCollider != null ? otherDoorCollider.GetComponentInParent<Animator>() : null;
     }
 
-    private IEnumerator OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            if (Input.GetKeyDown(KeyCode.F) && !pauseInteraction)
-            {
-                pauseInteraction = true;
+    public void ExecuteLogic() {
+        pauseInteraction = true;
 
-                if(isLocked) {
-                    FindObjectOfType<AudioManager>().Play("lockDoor");
-                    showPadlock();
-                } else {
-                    openClose();
-                }
-
-                yield return new WaitForSeconds(1 / speed);
-                pauseInteraction = false;
-            }
+        if(isLocked) {
+            FindObjectOfType<AudioManager>().Play("lockDoor");
+            showPadlock();
+        } else {
+            openClose();
         }
+
+        new WaitForSeconds(1 / speed);
+        pauseInteraction = false;
     }
 
     public void unLock() {
