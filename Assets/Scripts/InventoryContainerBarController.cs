@@ -14,8 +14,8 @@ public class InventoryContainerBarController : MonoBehaviour
         go.transform.SetParent(this.gameObjects[index].transform);
         go.transform.localPosition = Vector3.zero;
         
-        go.transform.eulerAngles = go.GetComponent<InventoryObjectController>().angle;
-        go.transform.localScale = go.GetComponent<InventoryObjectController>().scale;
+        go.transform.eulerAngles = go.GetComponent<CatchableObjectController>().angleInInventory;
+        go.transform.localScale = go.GetComponent<CatchableObjectController>().scaleInInventory;
     }
 
     public void removeObject(int index) {

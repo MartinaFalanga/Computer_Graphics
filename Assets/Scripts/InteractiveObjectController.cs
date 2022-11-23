@@ -41,9 +41,13 @@ public class InteractiveObjectController : MonoBehaviour
                     gameObject.GetComponent<OpenCloseController>().ExecuteLogic();
                 }
 
-                if(gameObject.GetComponent<InventoryObjectController>() != null) {
-                    gameObject.GetComponent<InventoryObjectController>().ExecuteLogic();                
-                }              
+                if(gameObject.GetComponent<CatchableObjectController>() != null) {
+                    gameObject.GetComponent<CatchableObjectController>().ExecuteLogic();                
+                }
+
+                if(gameObject.GetComponent<InteractiveRadioController>() != null) {
+                    gameObject.GetComponent<InteractiveRadioController>().ExecuteLogic();                
+                }
             
                 DismissInteractionMenu();  
             }

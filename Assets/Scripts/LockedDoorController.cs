@@ -45,7 +45,7 @@ public class LockedDoorController : MonoBehaviour
 
         foreach(GameObject unlockableObject in unlockableObjects) {
             unlockableObject.GetComponent<InteractiveObjectController>().interactionCollider.GetComponent<BoxCollider>().enabled = true;
-            unlockableObject.GetComponent<CatchableObjectsController>().unLock();
+            unlockableObject.GetComponent<CatchableObjectController>().unLock();
         }
 
         gameObject.GetComponent<OpenCloseController>().unLock();
