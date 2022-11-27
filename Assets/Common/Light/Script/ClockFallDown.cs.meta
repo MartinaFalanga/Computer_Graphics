@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: a9b9c54b93fce6e4b9c1c15a0da72a98
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - lootCreate: {fileID: 1315608016270585768, guid: 65890afcbc971d84abfd30395f3f732a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
