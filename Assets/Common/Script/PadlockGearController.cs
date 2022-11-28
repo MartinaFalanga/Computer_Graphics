@@ -29,6 +29,8 @@ public class PadlockGearController : MonoBehaviour
         Debug.Log("Clicked numeric padlock to value="+value);
         animator.Play("GearRotation" + value, 0,0.0f);
 
+        GetComponent<AudioSource>().Play();
+
         GameObject parent = gear.transform.parent.gameObject;
         parent.GetComponent<CombinationThreePadlockController>().checkUnlockAndUnlock();
     }

@@ -5,13 +5,15 @@ using UnityEngine;
 public class ObjectZoomInteractionMenuController : MonoBehaviour
 {
 
+    public GameObject menuObjectContainer;
+
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Q))
         {
-            Debug.Log("Dismissing menu");
-            gameObject.SetActive(false);
-            GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().canControl = true;
+            Debug.Log("Destroying children");
+            DestroyChildren();
+            transform.parent.gameObject.GetComponent<MenusController>().DismissAll();
         }
     }
     
@@ -24,6 +26,14 @@ public class ObjectZoomInteractionMenuController : MonoBehaviour
         goClone.transform.localScale = go.GetComponent<ZoomableObjectController>().scale;
         goClone.transform.eulerAngles = go.GetComponent<ZoomableObjectController>().angle;
         goClone.layer=12;
+    }
+
+    // private methods
+    
+    private void DestroyChildren() {
+        for (var i = menuObjectContainer.transform.childCount - 1; i >= 0; i--) {
+            Destroy(menuObjectContainer.transform.GetChild(i).gameObject);
+        }
     }
 
 

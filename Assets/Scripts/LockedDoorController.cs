@@ -23,8 +23,6 @@ public class LockedDoorController : MonoBehaviour
 
     public void showPadlock() {
         padlockMenu.SetActive(true);
-        GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().canControl = false;
-        //GameObject.Find("First Person Controller").GetComponent<MouseLook>().canControl = false;
 
         switch(lockType) {
             case LockType.CombinationThree:
@@ -43,14 +41,11 @@ public class LockedDoorController : MonoBehaviour
     }
 
     public void unLock() {
-        padlockMenu.SetActive(false);
-
-        GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().canControl = true;
-        //GameObject.Find("First Person Controller").GetComponent<MouseLook>().canControl = true;
+        padlockMenu.GetComponent<LockMenuController>().Dismiss();
 
         foreach(GameObject unlockableObject in unlockableObjects) {
-            unlockableObject.GetComponent<BoxCollider>().enabled = true;
-            unlockableObject.GetComponent<CatchableObjectsController>().unLock();
+            unlockableObject.GetComponent<InteractiveObjectController>().interactionCollider.GetComponent<BoxCollider>().enabled = true;
+            unlockableObject.GetComponent<CatchableObjectController>().unLock();
         }
 
         gameObject.GetComponent<OpenCloseController>().unLock();
