@@ -48,6 +48,10 @@ public class InteractiveObjectController : MonoBehaviour
                 if(gameObject.GetComponent<InteractiveRadioController>() != null) {
                     gameObject.GetComponent<InteractiveRadioController>().ExecuteLogic();                
                 }
+
+                if(gameObject.GetComponent<CorridorDoorOpener>() != null) {
+                    gameObject.GetComponent<CorridorDoorOpener>().ExecuteLogic();                
+                }
             
                 DismissInteractionMenu();  
             }
