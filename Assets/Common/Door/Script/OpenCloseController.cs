@@ -69,19 +69,19 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
             default: break;
         }
 
-        if(isOpen) {
+/*        if(isOpen) {
             changeInteractionMenuText("F: Close");
         } else {
             changeInteractionMenuText("F: Open");
-        }
+        }*/
     }
 
     private void showPadlock() {
         gameObject.GetComponent<LockedDoorController>().showPadlock();
     }
 
-    private void changeInteractionMenuText(string text) {
-        gameObject.GetComponent<InteractiveObjectController>().interactionMenuText = text;
-    }
+/* private void changeInteractionMenuText(string text) {
+    gameObject.GetComponent<InteractiveObjectController>().interactionMenuText = text;
+    } */
 
 }
