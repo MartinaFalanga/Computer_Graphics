@@ -1,13 +1,20 @@
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using System.Web;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
 
     public Sound[] sounds;
+    public AudioSource[] audioSources;
+    public Dictionary<string, float> audioSourcesToVolumes;
+    public AudioMixer audioMixer;
 
     public static AudioManager instance;
+
+    private float generalVolume;
 
     void Awake()
     {
@@ -29,6 +36,17 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
         }
+        audioSourcesToVolumes = new Dictionary<string, float>();
+        foreach(AudioSource audioSource in audioSources)
+        {
+            Debug.Log(audioSource.name + ": " + audioSource.volume);
+            audioSourcesToVolumes.Add(audioSource.name, audioSource.volume);
+        }
+    }
+
+    public float GetGeneralVolume()
+    {
+        return generalVolume;
     }
 
     public void Play(string name)
@@ -40,5 +58,28 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.PlayDelayed(delay);
+    }
+
+    public void SetVolume(float volume)
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = volume;
+        }
+        foreach(AudioSource audioSource in audioSources)
+        {
+            audioSource.volume = audioSourcesToVolumes[audioSource.name] * volume;
+            if (audioSource.name.Equals("lamp02 (1)"))
+            {
+                Debug.Log("volume del neon: " + audioSource.volume);
+            }
+        }
+        audioMixer.SetFloat("volume", volume);
+        this.generalVolume = volume;
+    }
+
+    public float GetFixedVolumeForAudioSource(string audioSourceName)
+    {
+        return audioSourcesToVolumes[audioSourceName] * generalVolume;
     }
 }

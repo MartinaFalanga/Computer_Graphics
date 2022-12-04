@@ -60,9 +60,9 @@ using System.Collections;
 public class FlashingLightController : MonoBehaviour
 {
     [Tooltip("External light to flicker; you can leave this null if you attach script to a light")]
-    public new Light light;
+    public Light lightObject;
     [Tooltip("External light to flicker; you can leave this null if you attach script to a light")]
-    public new GameObject lamp;
+    public GameObject lampObject;
     [Tooltip("Minimum random light intensity")]
     public float minIntensity = 0f;
     [Tooltip("Maximum random light intensity")]
@@ -77,9 +77,8 @@ public class FlashingLightController : MonoBehaviour
     float lastSum = 0;
     private Vector3 originalColor;
     private Material lampMaterial;
-    private AudioSource audio;
-    private float originalVolume;
-    private bool isFlickering;
+    private AudioSource audiosource;
+    private AudioManager audioManager;
 
 
     /// <summary>
@@ -95,26 +94,22 @@ public class FlashingLightController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Lampada: " + lamp);
-        Component[] components = lamp.GetComponents(typeof(Component));
-        foreach (Component component in components)
-        {
-            Debug.Log(component.ToString());
-        }
+        audioManager = AudioManager.instance;
+        Debug.Log(audioManager);
+        Component[] components = lampObject.GetComponents(typeof(Component));
         smoothQueue = new Queue<float>(smoothing);
         // External or internal light?
-        if (light == null)
+        if (lightObject == null)
         {
-            light = GetComponent<Light>();
+            lightObject = GetComponent<Light>();
         }
-        if(lamp != null)
+        if(lampObject != null)
         {
-            lampMaterial = lamp.GetComponent<MeshRenderer>().material;
+            lampMaterial = lampObject.GetComponent<MeshRenderer>().material;
             originalColor = lampMaterial.GetVector("_EmissionColor");
         }
-        audio = lamp.GetComponent<AudioSource>();
-        originalVolume = audio.volume;
-        audio.Play();
+        audiosource = lampObject.GetComponent<AudioSource>();
+        audiosource.Play();
     }
 
     void Update()
@@ -125,9 +120,8 @@ public class FlashingLightController : MonoBehaviour
 
     IEnumerator FlickeringLight()
     {
-        if (light != null || lamp != null)
+        if (lightObject != null || lampObject != null)
         {
-            isFlickering = false;
 
             // pop off an item if too big
             while (smoothQueue.Count >= smoothing)
@@ -141,18 +135,17 @@ public class FlashingLightController : MonoBehaviour
             lastSum += newVal;
 
             // Calculate new smoothed average
-            if (light != null)
+            if (lightObject != null)
             {
-                light.intensity = lastSum / (float)smoothQueue.Count;
+                lightObject.intensity = lastSum / (float)smoothQueue.Count;
             }
             if (lampMaterial != null)
             {
                 lampMaterial.SetVector("_EmissionColor", originalColor * newVal);
 
-                audio.volume = originalVolume * newVal;
+                audiosource.volume = audioManager.GetFixedVolumeForAudioSource(audiosource.name) * newVal;
             }
             yield return new WaitForSeconds(Random.Range(0.3f, 1.0f));
-            isFlickering = true;
         }
     }
 
