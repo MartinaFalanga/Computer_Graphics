@@ -7,6 +7,8 @@ public class ObjectZoomInteractionMenuController : MonoBehaviour
 
     public GameObject menuObjectContainer;
 
+    public GameObject menuLight;
+
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.Q))
@@ -26,6 +28,10 @@ public class ObjectZoomInteractionMenuController : MonoBehaviour
         goClone.transform.localScale = go.GetComponent<ZoomableObjectController>().scale;
         goClone.transform.eulerAngles = go.GetComponent<ZoomableObjectController>().angle;
         goClone.layer=12;
+        
+        SetGameLayerRecursive(goClone,12);
+
+        menuLight.GetComponent<Light>().intensity = go.GetComponent<ZoomableObjectController>().menuLightIntensity;
     }
 
     // private methods
@@ -33,6 +39,20 @@ public class ObjectZoomInteractionMenuController : MonoBehaviour
     private void DestroyChildren() {
         for (var i = menuObjectContainer.transform.childCount - 1; i >= 0; i--) {
             Destroy(menuObjectContainer.transform.GetChild(i).gameObject);
+        }
+    }
+
+    private void SetGameLayerRecursive(GameObject _go, int _layer)
+    {
+        _go.layer = _layer;
+        foreach (Transform child in _go.transform)
+        {
+            child.gameObject.layer = _layer;
+
+            Transform _HasChildren = child.GetComponentInChildren<Transform>();
+            if (_HasChildren != null)
+                SetGameLayerRecursive(child.gameObject, _layer);
+            
         }
     }
 
