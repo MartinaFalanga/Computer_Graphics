@@ -59,7 +59,7 @@ public class SettingsMenu : MonoBehaviour
         SetFullScreen(PlayerPrefs.GetInt("fullscreen") == 1);
         SetVSync(PlayerPrefs.GetInt("vsync"));
         SetMotionBlur(PlayerPrefs.GetInt("motionBlur") == 1);
-        SetMotionBlur(PlayerPrefs.GetInt("bloom") == 1);
+        SetBloom(PlayerPrefs.GetInt("bloom") == 1);
     }
 
     public void SetVolume(float volume)
@@ -79,7 +79,6 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        Debug.Log("Risoluzione: " + resolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         PlayerPrefs.SetInt("resolution", resolutionIndex);

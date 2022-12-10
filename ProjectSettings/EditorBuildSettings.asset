@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Main_menu/Scenes/Main_menu.unity
+    guid: 3a38b44c320ca1144a93f61c9e9ce51c
+  - enabled: 1
+    path: Assets/JP_School restroom_V2/Scenes/School_Restroom_Night.unity
+    guid: cea09c6bf6acffa40b2971072c31155e
   m_configObjects: {}
