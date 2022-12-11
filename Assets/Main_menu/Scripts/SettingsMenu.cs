@@ -1,17 +1,11 @@
 using System.Collections.Generic;
-
-using SOHNE.Accessibility.Colorblindness;
-
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-
-    public AudioManager audioManager;
-    public Colorblindness accessibilityManager;
+    public SettingsManager settingsManager;
     public Scrollbar volumeScrollbar;
     public TMPro.TMP_Dropdown graphicsDropdown;
     public TMPro.TMP_Dropdown resolutionsDropdown;
@@ -21,13 +15,10 @@ public class SettingsMenu : MonoBehaviour
     public Toggle fullscreenToggle;
     public Toggle motionBlurToggle;
     public Toggle bloomToggle;
-    public UnityEngine.Rendering.Universal.UniversalAdditionalCameraData cameraData;
     private Resolution[] resolutions;
-    private Volume renderingVolume;
 
     public void Start()
     {
-        renderingVolume = FindObjectOfType<Volume>();
         resolutions = Screen.resolutions;
         resolutionsDropdown.ClearOptions();
         List<string> options = new List<string>();
@@ -43,7 +34,6 @@ public class SettingsMenu : MonoBehaviour
             }
         }
         resolutionsDropdown.AddOptions(options);
-        cameraData.antialiasing = UnityEngine.Rendering.Universal.AntialiasingMode.None;
 
         LoadSavings();
     }
@@ -64,15 +54,13 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        audioManager.SetVolume(volume);
-        PlayerPrefs.SetFloat("volume", volume);
+        settingsManager.SetVolume(volume);
         volumeScrollbar.value = volume;
     }
 
     public void SetGraphicQuality(int qualityIndex)
     {
-        QualitySettings.SetQualityLevel(qualityIndex);
-        PlayerPrefs.SetInt("graphicQuality", qualityIndex);
+        settingsManager.SetGraphicQuality(qualityIndex);
         graphicsDropdown.value = qualityIndex;
         graphicsDropdown.RefreshShownValue();
     }
@@ -80,79 +68,45 @@ public class SettingsMenu : MonoBehaviour
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        PlayerPrefs.SetInt("resolution", resolutionIndex);
+        settingsManager.SetResolution(resolution, resolutionIndex);
         resolutionsDropdown.value = resolutionIndex;
         resolutionsDropdown.RefreshShownValue();
     }
 
     public void SetFullScreen(bool isFullScreen)
     {
-        Screen.fullScreen = isFullScreen;
-        PlayerPrefs.SetInt("fullscreen", isFullScreen ? 1 : 0);
+        settingsManager.SetFullScreen(isFullScreen);
         fullscreenToggle.isOn = isFullScreen;
     }
 
     public void SetMotionBlur(bool isMotionBlurActive)
     {
-        MotionBlur tmpBlur, motionBlur;
-        if (renderingVolume.profile.TryGet<MotionBlur>(out tmpBlur))
-        {
-            motionBlur = tmpBlur;
-            motionBlur.active = isMotionBlurActive;
-        }
-        PlayerPrefs.SetInt("motionBlur", isMotionBlurActive ? 1 : 0);
+        settingsManager.SetMotionBlur(isMotionBlurActive);
         motionBlurToggle.isOn = isMotionBlurActive;
     }
 
     public void SetBloom(bool isBloomActive)
     {
-        Bloom tmpBloom, bloom;
-        if (renderingVolume.profile.TryGet<Bloom>(out tmpBloom))
-        {
-            bloom = tmpBloom;
-            bloom.active = isBloomActive;
-        }
-        PlayerPrefs.SetInt("bloom", isBloomActive ? 1 : 0);
+        settingsManager.SetBloom(isBloomActive);
         bloomToggle.isOn = isBloomActive;
     }
 
     public void SetAntiAliasing(int antiAliasingIndex)
     {
-        switch (antiAliasingIndex)
-        {
-            case 1: 
-                QualitySettings.antiAliasing = 4;
-                cameraData.antialiasing = UnityEngine.Rendering.Universal.AntialiasingMode.FastApproximateAntialiasing;
-                break;
-            case 2: 
-                QualitySettings.antiAliasing = 8;
-                cameraData.antialiasing = UnityEngine.Rendering.Universal.AntialiasingMode.SubpixelMorphologicalAntiAliasing;
-                cameraData.antialiasingQuality = UnityEngine.Rendering.Universal.AntialiasingQuality.High;
-                break;
-            default: 
-                QualitySettings.antiAliasing = 0;
-                cameraData.antialiasing = UnityEngine.Rendering.Universal.AntialiasingMode.None;
-                break;
-        }
-        PlayerPrefs.SetInt("antialiasingIndex", antiAliasingIndex);
-        PlayerPrefs.SetInt("antialiasingQuality", QualitySettings.antiAliasing);
+        settingsManager.SetAntiAliasing(antiAliasingIndex);
         antiAliasingDropdown.value = antiAliasingIndex;
         antiAliasingDropdown.RefreshShownValue();
     }
 
     public void SetVSync(int vSyncIndex)
     {
-        QualitySettings.vSyncCount = vSyncIndex;
-        PlayerPrefs.SetInt("vsync", vSyncIndex);
+        settingsManager.SetVSync(vSyncIndex);
         vsyncDropdown.value = vSyncIndex;
         vsyncDropdown.RefreshShownValue();
     }
 
     public void SetColorBlindnessMode(int colorBlindnessIndex) {
-        accessibilityManager.SetCurrentType(colorBlindnessIndex);
-        accessibilityManager.InitChange();
-        PlayerPrefs.SetInt("colorblindness", colorBlindnessIndex);
+        settingsManager.SetColorBlindnessMode(colorBlindnessIndex);
         colorBlindnessDropdown.value = colorBlindnessIndex;
         colorBlindnessDropdown.RefreshShownValue();
     }

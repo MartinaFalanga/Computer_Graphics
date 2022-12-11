@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
 {
 
     public Sound[] sounds;
-    public AudioSource[] audioSources;
+    private AudioSource[] audioSources;
     public Dictionary<string, float> audioSourcesToVolumes;
     public AudioMixer audioMixer;
 
@@ -37,6 +37,7 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
         }
         audioSourcesToVolumes = new Dictionary<string, float>();
+        audioSources = FindObjectsOfType<AudioSource>();
         foreach(AudioSource audioSource in audioSources)
         {
             audioSourcesToVolumes.Add(audioSource.name, audioSource.volume);
@@ -65,7 +66,10 @@ public class AudioManager : MonoBehaviour
         {
             s.source.volume = volume;
         }
-        foreach(AudioSource audioSource in audioSources)
+        if (SceneLoader.IsSceneChanged()){
+            audioSources = FindObjectsOfType<AudioSource>();
+        }
+        foreach (AudioSource audioSource in audioSources)
         {
             audioSource.volume = audioSourcesToVolumes[audioSource.name] * volume;
         }
