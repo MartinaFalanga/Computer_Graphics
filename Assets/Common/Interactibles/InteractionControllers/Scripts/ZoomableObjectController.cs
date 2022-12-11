@@ -19,6 +19,7 @@ public class ZoomableObjectController : MonoBehaviour, IInteractiveObject
         
         zoomableObjectMenu.SetActive(true);
         zoomableObjectMenu.GetComponent<ObjectZoomInteractionMenuController>().showObject(gameObject);
+            
     }
     
 }

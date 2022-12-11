@@ -15,6 +15,10 @@ public class Footsteps : MonoBehaviour
                                     10.380f, 11.017f, 11.577f, 12.148f};
     private int currentStep = 0;
 
+    public GameObject camera;
+
+    public GameObject phone;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,13 +33,29 @@ public class Footsteps : MonoBehaviour
             if(footstepSource.time > stepCompleteSort[currentStep]) {
                 currentStep = (currentStep + 1) % NSTEPS;
             }
+            StartBobbing();
         } else {
             if(footstepSource.time > stepCompleteSort[currentStep]) {
                 isFootstepPlaying = false;
                 currentStep = 0;
             }
+            StopBobbing();
         }
         
         footstepSource.enabled = isFootstepPlaying;
     }
+
+    // private methods
+
+    private void StartBobbing() {
+        camera.GetComponent<Animator>().Play("HeadBobbing");
+        phone.GetComponent<Animator>().Play("PhoneShaking");
+    }
+
+    private void StopBobbing() {
+        camera.GetComponent<Animator>().Play("New State");
+        phone.GetComponent<Animator>().Play("New State");
+    }
+
+
 }

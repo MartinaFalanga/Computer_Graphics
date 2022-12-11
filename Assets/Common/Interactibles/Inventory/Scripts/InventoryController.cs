@@ -6,7 +6,7 @@ public class InventoryController : MonoBehaviour
 {
 
     public GameObject[] gameObjects;
-    public GameObject inventoryBar;
+    public InventoryContainerBarController inventoryBar;
     private int currIndex = 0;
     private const int MAX_OBJECTS = 3;
     
@@ -45,7 +45,7 @@ public class InventoryController : MonoBehaviour
 
     private void insertInInventoryBar(GameObject goToDuplicate, int currIndex) {
         GameObject go = GameObject.Instantiate(goToDuplicate);
-        inventoryBar.GetComponent<InventoryContainerBarController>().addObject(go, currIndex);
+        inventoryBar.addObject(go, currIndex);
     }
 
     public void deleteObject(GameObject toDelete) {

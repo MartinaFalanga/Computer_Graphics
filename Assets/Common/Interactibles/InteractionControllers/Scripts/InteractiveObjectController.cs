@@ -15,7 +15,9 @@ public class InteractiveObjectController : MonoBehaviour
 
     public Material emissionMaterial;
 
-    private bool isPlayerInInteractionCollider;
+    public bool interactionOnce;
+
+    public bool isPlayerInInteractionCollider;
 
     private bool isPlayerPointingWithMouse;
 
@@ -48,8 +50,22 @@ public class InteractiveObjectController : MonoBehaviour
                 if(gameObject.GetComponent<InteractiveRadioController>() != null) {
                     gameObject.GetComponent<InteractiveRadioController>().ExecuteLogic();                
                 }
+
+                if(gameObject.GetComponent<CorridorDoorOpener>() != null) {
+                    gameObject.GetComponent<CorridorDoorOpener>().ExecuteLogic();                
+                }
+
+                if(gameObject.GetComponent<ElectricSwitchController>() != null) {
+                    gameObject.GetComponent<ElectricSwitchController>().ExecuteLogic();
+                }
             
                 DismissInteractionMenu();  
+
+                if(interactionOnce) {
+                    interactionCollider.SetActive(false);
+                    isPlayerInInteractionCollider = false;
+                }
+
             }
         }
     }
