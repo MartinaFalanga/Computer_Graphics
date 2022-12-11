@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5419598688879735967}
   - component: {fileID: 3910616064272172218}
   m_Layer: 0
-  m_Name: '[Accessibility]'
+  m_Name: Accessibility Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
