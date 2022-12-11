@@ -10,7 +10,7 @@ public class InventoryContainerBarController : MonoBehaviour
     
     public void addObject(GameObject go, int index) {
         go.SetActive(true);
-        go.layer = 12;
+        go.layer = 5;
         go.transform.SetParent(this.gameObjects[index].transform);
         go.transform.localPosition = Vector3.zero;
         
