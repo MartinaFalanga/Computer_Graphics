@@ -2,21 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectZoomInteractionMenuController : MonoBehaviour
+public class ObjectZoomInteractionMenuController : MonoBehaviour, ISingleMenuController
 {
 
     public GameObject menuObjectContainer;
 
     public GameObject menuLight;
 
+
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            Debug.Log("Destroying children");
-            DestroyChildren();
-            transform.parent.gameObject.GetComponent<MenusController>().DismissAll();
-        }
+        
     }
     
     public void showObject(GameObject go) {
@@ -27,11 +23,22 @@ public class ObjectZoomInteractionMenuController : MonoBehaviour
         goClone.transform.localPosition = go.GetComponent<ZoomableObjectController>().position;
         goClone.transform.localScale = go.GetComponent<ZoomableObjectController>().scale;
         goClone.transform.eulerAngles = go.GetComponent<ZoomableObjectController>().angle;
-        goClone.layer=12;
-        
-        SetGameLayerRecursive(goClone,12);
+
+        int layer = LayerMask.NameToLayer("UI");
+
+        goClone.layer = layer;
+
+
+        SetGameLayerRecursive(goClone, layer);
 
         menuLight.GetComponent<Light>().intensity = go.GetComponent<ZoomableObjectController>().menuLightIntensity;
+    }
+
+
+    public void OnDismissMenu()
+    {
+        Debug.Log("Destroying menu children");
+        DestroyChildren();
     }
 
     // private methods

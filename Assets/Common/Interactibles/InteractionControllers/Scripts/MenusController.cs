@@ -4,26 +4,42 @@ using UnityEngine;
 
 public class MenusController : MonoBehaviour
 {
+
+    public GameObject firstPersonController;
+    public GameObject mainCamera;
+    public GameObject uiCamera;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            DismissAll();
+        }
+    }
+
     
-    public void DismissAll() {
+    public void DismissAll()
+    {
+        Debug.Log("Dismissing all menus");
+
+        uiCamera.SetActive(false);
         DismissMenus();
         UnlockPlayer();
     }
 
-    // private methods    
-    private void DismissMenus() {
+    // private methods
+
+    private void DismissMenus()
+    {
         for (var i = gameObject.transform.childCount - 1; i >= 0; i--) {
             gameObject.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
 
     private void UnlockPlayer() {
-        GameObject player = GameObject.Find("First Person Controller").gameObject;
-        GameObject mainCamera = GameObject.Find("Main Camera").gameObject;
-
-        player.GetComponent<CharacterMotor>().enabled = true;
-        player.GetComponent<CharacterMotor>().canControl = true;
-        player.GetComponent<MouseLook>().enabled = true;
+        firstPersonController.GetComponent<CharacterMotor>().enabled = true;
+        firstPersonController.GetComponent<CharacterMotor>().canControl = true;
+        firstPersonController.GetComponent<MouseLook>().enabled = true;
         mainCamera.GetComponent<MouseLook>().enabled = true;
     }
 

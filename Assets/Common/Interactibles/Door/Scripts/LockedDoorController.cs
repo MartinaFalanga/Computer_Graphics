@@ -9,10 +9,18 @@ public class LockedDoorController : MonoBehaviour
 
     public GameObject padlockMenu;
 
+    public GameObject uiCamera;
+
+    public GameObject combinationPadlock;
+
+    public GameObject classicPadlock;
+
+    public GameObject menusCanvas;
+
     private LockType lockType;
 
-    // To refactor
-    public GameObject requiredInventory;
+    public GameObject[] requiredInventory;
+
     public int[] combination;
 
     // Start is called before the first frame update
@@ -22,17 +30,18 @@ public class LockedDoorController : MonoBehaviour
     }
 
     public void showPadlock() {
+        uiCamera.SetActive(true);
         padlockMenu.SetActive(true);
 
         switch(lockType) {
             case LockType.CombinationThree:
                 Debug.Log("combination lock three");
-                GameObject.Find("CombinationPadlock").GetComponent<CombinationThreePadlockController>().setActualGameObject(gameObject);
+                combinationPadlock.GetComponent<CombinationThreePadlockController>().setActualGameObject(gameObject);
                 break;
             case LockType.Classic:                
                 Debug.Log("combination classic");
-                GameObject.Find("ClassicPadlock").GetComponent<ClassicPadlockController>().setActualGameObject(gameObject);
-                if(GameObject.Find("ClassicPadlock").GetComponent<ClassicPadlockController>().isInventoryValid()) {
+                classicPadlock.GetComponent<ClassicPadlockController>().setActualGameObject(gameObject);
+                if(classicPadlock.GetComponent<ClassicPadlockController>().isInventoryValid()) {
                     unLock();
                 }
                 break;
@@ -41,7 +50,8 @@ public class LockedDoorController : MonoBehaviour
     }
 
     public void unLock() {
-        padlockMenu.GetComponent<LockMenuController>().Dismiss();
+        uiCamera.SetActive(false);
+        menusCanvas.GetComponent<MenusController>().DismissAll();
 
         foreach(GameObject unlockableObject in unlockableObjects) {
             unlockableObject.GetComponent<InteractiveObjectController>().interactionCollider.GetComponent<BoxCollider>().enabled = true;

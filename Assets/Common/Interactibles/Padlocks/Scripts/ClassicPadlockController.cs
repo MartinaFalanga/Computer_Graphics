@@ -8,6 +8,12 @@ public class ClassicPadlockController : MonoBehaviour
 
     private GameObject[] goRequiredInventoryObj;
 
+    public GameObject padlockMenuBar;
+
+    public GameObject playerInventory;
+
+    public GameObject firstPersonController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,31 +27,30 @@ public class ClassicPadlockController : MonoBehaviour
         {
             Debug.Log("Dismissing padlock menu");
             gameObject.transform.parent.gameObject.SetActive(false);
-            GameObject.Find("First Person Controller").GetComponent<CharacterMotor>().canControl = true;
+            firstPersonController.GetComponent<CharacterMotor>().canControl = true;
         }
     }
 
     public void setActualGameObject(GameObject go) {
         this.lockedGameObject = go;
-        GameObject padlockMenuBar = GameObject.Find("InventoryRequiredBar").gameObject;
 
-        GameObject goRequiredInventory = go.GetComponent<LockedDoorController>().requiredInventory;
-        goRequiredInventoryObj = new GameObject[goRequiredInventory.transform.childCount];
+        GameObject[] goRequiredInventory = go.GetComponent<LockedDoorController>().requiredInventory;
+        goRequiredInventoryObj = new GameObject[goRequiredInventory.Length];
 
         int i = 0;
-        foreach(Transform goRequiredInventoryChild in goRequiredInventory.transform) {
-            goRequiredInventoryObj[i] = Instantiate(goRequiredInventoryChild.gameObject);
+        foreach(GameObject goRequiredInventoryGameObject in goRequiredInventory) {
+            Debug.Log("Putting " + goRequiredInventoryGameObject.name + " in required inventory");
+            goRequiredInventoryObj[i] = Instantiate(goRequiredInventoryGameObject);
             goRequiredInventoryObj[i].transform.SetParent(padlockMenuBar.transform.GetChild(i));
             goRequiredInventoryObj[i].transform.localPosition = new Vector3(0,0,0);
             goRequiredInventoryObj[i].transform.localScale = goRequiredInventoryObj[i].GetComponent<RequiredInventoryDimensionsController>().scale;
             goRequiredInventoryObj[i].transform.eulerAngles = goRequiredInventoryObj[i].GetComponent<RequiredInventoryDimensionsController>().angle;
-            goRequiredInventoryObj[i].layer = 12;
+            goRequiredInventoryObj[i].layer = LayerMask.NameToLayer("UI");
             i++;
         }
     }
 
     public bool isInventoryValid() {
-        GameObject playerInventory = GameObject.Find("Inventory");
         GameObject[] playerInventoryObjects = playerInventory.GetComponent<InventoryController>().gameObjects;
 
         GameObject[] requiredInventoryObjects = new GameObject[2];

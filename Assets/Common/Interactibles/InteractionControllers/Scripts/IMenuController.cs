@@ -1,0 +1,4 @@
+interface ISingleMenuController
+{
+    void OnDismissMenu();
+}

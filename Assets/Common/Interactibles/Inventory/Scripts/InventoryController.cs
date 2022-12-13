@@ -24,7 +24,7 @@ public class InventoryController : MonoBehaviour
             inventoryBar.transform.parent.gameObject.SetActive(true);
         } else if (Input.GetKeyDown(KeyCode.Q))
         {
-            inventoryBar.transform.parent.gameObject.SetActive(false);
+            //inventoryBar.transform.parent.gameObject.SetActive(false);
         }
     }
 
