@@ -11,11 +11,15 @@ public class ZoomableObjectController : MonoBehaviour, IInteractiveObject
 
     public float menuLightIntensity;
 
+    public GameObject uiCamera;
+
     /** passare il game object ObjectZoomInteractionMenu che trovi nel menu a sinistra */
     public GameObject zoomableObjectMenu;
 
     public void ExecuteLogic() {
         Debug.Log("ZoomableObjectController - ExecuteLogic");
+
+        uiCamera.SetActive(true);
         
         zoomableObjectMenu.SetActive(true);
         zoomableObjectMenu.GetComponent<ObjectZoomInteractionMenuController>().showObject(gameObject);

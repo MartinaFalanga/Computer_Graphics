@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InteractiveObjectController : MonoBehaviour
 {
-    public GameObject interactionMenuCanvas;
+    public GameObject interactionMenuPanel;
 
     public GameObject interactionMenuTextmesh;
 
@@ -25,6 +25,7 @@ public class InteractiveObjectController : MonoBehaviour
 
     private Color originalEmissionColor;
 
+
     void Start() {
         interactionCollider.GetComponent<InteractionColliderController>().SetInteractiveObjectController(this);
         
@@ -35,7 +36,7 @@ public class InteractiveObjectController : MonoBehaviour
     void Update() {
         if(isPlayerInInteractionCollider && isPlayerPointingWithMouse) {
             if(Input.GetKeyDown(KeyCode.F)) {
-                if(gameObject.GetComponent<ZoomableObjectController>() != null) {            
+                if(gameObject.GetComponent<ZoomableObjectController>() != null) {
                     gameObject.GetComponent<ZoomableObjectController>().ExecuteLogic();
                 }
 
@@ -82,16 +83,15 @@ public class InteractiveObjectController : MonoBehaviour
         this.DismissInteractionMenu();
     }
     
-    void OnMouseOver()
+    void OnMouseEnter()
     {
-        Debug.Log("Mouse Over Object");
+        Debug.Log("Mouse Enter Object");
 
         GameObject player = GameObject.Find("First Person Controller").gameObject;
         this.isPlayerPointingWithMouse = true;
 
         if(this.isPlayerInInteractionCollider && player.GetComponent<CharacterMotor>().canControl) {
-            interactionMenuTextmesh.GetComponent<TextMeshProUGUI>().text = interactionMenuText;
-            interactionMenuCanvas.SetActive(true);
+            EnableInteractionMenu();
         }
 
         if(emissionMaterial != null) {
@@ -121,7 +121,13 @@ public class InteractiveObjectController : MonoBehaviour
     // private methods
 
     private void DismissInteractionMenu() {
-        interactionMenuCanvas.SetActive(false);
+        interactionMenuPanel.SetActive(false);
+    }
+
+    private void EnableInteractionMenu()
+    {
+        interactionMenuTextmesh.GetComponent<TextMeshProUGUI>().text = interactionMenuText;
+        interactionMenuPanel.SetActive(true);
     }
 
 }

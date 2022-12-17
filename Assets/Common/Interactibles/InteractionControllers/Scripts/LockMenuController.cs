@@ -2,20 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LockMenuController : MonoBehaviour
+public class LockMenuController : MonoBehaviour, ISingleMenuController
 {
 
     public LockType lockType;
 
-    void Update()
+    public void OnDismissMenu()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Dismiss();
-        }
+
     }
 
-    public void Dismiss() {
-        transform.parent.gameObject.GetComponent<MenusController>().DismissAll();
-    }
 }

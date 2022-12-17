@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MenuStopPlayerController : MonoBehaviour
 {
+
+    public GameObject firstPersonController;
+    public GameObject mainCamera;
     
     void OnEnable()
     {
@@ -11,12 +14,9 @@ public class MenuStopPlayerController : MonoBehaviour
     }
 
     private void LockPlayer() {
-        GameObject player = GameObject.Find("First Person Controller").gameObject;
-        GameObject mainCamera = GameObject.Find("Main Camera").gameObject;
-
-        player.GetComponent<CharacterMotor>().canControl = false;
-        player.GetComponent<CharacterMotor>().enabled = false;
-        player.GetComponent<MouseLook>().enabled = false;
+        firstPersonController.GetComponent<CharacterMotor>().canControl = false;
+        firstPersonController.GetComponent<CharacterMotor>().enabled = false;
+        firstPersonController.GetComponent<MouseLook>().enabled = false;
         mainCamera.GetComponent<MouseLook>().enabled = false;
     }
 }
