@@ -57,7 +57,10 @@ public class AudioManager : MonoBehaviour
     public void PlayDelayed(string name, float delay)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.source.PlayDelayed(delay);
+        if (s != null)
+        {
+            s.source.PlayDelayed(delay);
+        }
     }
 
     public void SetVolume(float volume)

@@ -9,13 +9,13 @@ public class LockedDoorController : MonoBehaviour
 
     public GameObject padlockMenu;
 
-    public GameObject uiCamera;
-
     public GameObject combinationPadlock;
 
     public GameObject classicPadlock;
 
     public GameObject menusCanvas;
+
+    public GameObject mainCamera;
 
     private LockType lockType;
 
@@ -30,10 +30,12 @@ public class LockedDoorController : MonoBehaviour
     }
 
     public void showPadlock() {
-        uiCamera.SetActive(true);
         padlockMenu.SetActive(true);
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
-        switch(lockType) {
+        FindObjectOfType<Camera>().depth = 0;
+
+        switch (lockType) {
             case LockType.CombinationThree:
                 Debug.Log("combination lock three");
                 combinationPadlock.GetComponent<CombinationThreePadlockController>().setActualGameObject(gameObject);
@@ -50,14 +52,11 @@ public class LockedDoorController : MonoBehaviour
     }
 
     public void unLock() {
-        uiCamera.SetActive(false);
-        menusCanvas.GetComponent<MenusController>().DismissAll();
-
         foreach(GameObject unlockableObject in unlockableObjects) {
             unlockableObject.GetComponent<InteractiveObjectController>().interactionCollider.GetComponent<BoxCollider>().enabled = true;
             unlockableObject.GetComponent<CatchableObjectController>().unLock();
         }
-
         gameObject.GetComponent<OpenCloseController>().unLock();
+        menusCanvas.GetComponent<MenusController>().DismissAll();
     }
 }

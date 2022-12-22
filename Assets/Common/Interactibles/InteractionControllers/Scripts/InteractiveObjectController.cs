@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -25,8 +23,12 @@ public class InteractiveObjectController : MonoBehaviour
 
     private Color originalEmissionColor;
 
+    private GameObject mainCamera;
+
 
     void Start() {
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
         interactionCollider.GetComponent<InteractionColliderController>().SetInteractiveObjectController(this);
         
         if(emissionMaterial != null)
@@ -36,6 +38,7 @@ public class InteractiveObjectController : MonoBehaviour
     void Update() {
         if(isPlayerInInteractionCollider && isPlayerPointingWithMouse) {
             if(Input.GetKeyDown(KeyCode.F)) {
+
                 if(gameObject.GetComponent<ZoomableObjectController>() != null) {
                     gameObject.GetComponent<ZoomableObjectController>().ExecuteLogic();
                 }
@@ -60,9 +63,9 @@ public class InteractiveObjectController : MonoBehaviour
                     gameObject.GetComponent<ElectricSwitchController>().ExecuteLogic();
                 }
             
-                DismissInteractionMenu();  
+                DismissInteractionMenu();
 
-                if(interactionOnce) {
+                if (interactionOnce) {
                     interactionCollider.SetActive(false);
                     isPlayerInInteractionCollider = false;
                 }

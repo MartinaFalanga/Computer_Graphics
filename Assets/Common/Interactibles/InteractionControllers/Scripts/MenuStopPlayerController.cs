@@ -17,6 +17,7 @@ public class MenuStopPlayerController : MonoBehaviour
         firstPersonController.GetComponent<CharacterMotor>().canControl = false;
         firstPersonController.GetComponent<CharacterMotor>().enabled = false;
         firstPersonController.GetComponent<MouseLook>().enabled = false;
+        CursorManager.instance.UpdateCursor(false);
         mainCamera.GetComponent<MouseLook>().enabled = false;
     }
 }

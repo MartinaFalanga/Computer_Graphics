@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class MenusController : MonoBehaviour
 {
 
     public GameObject firstPersonController;
     public GameObject mainCamera;
-    public GameObject uiCamera;
 
     void Update()
     {
@@ -21,18 +21,17 @@ public class MenusController : MonoBehaviour
     public void DismissAll()
     {
         Debug.Log("Dismissing all menus");
-
-        uiCamera.SetActive(false);
         DismissMenus();
         UnlockPlayer();
+        mainCamera.GetComponent<Camera>().depth = 2;
     }
 
     // private methods
 
     private void DismissMenus()
     {
-        for (var i = gameObject.transform.childCount - 1; i >= 0; i--) {
-            gameObject.transform.GetChild(i).gameObject.SetActive(false);
+        foreach(GameObject menu in GameObject.FindGameObjectsWithTag("Menu")){
+            menu.SetActive(false);
         }
     }
 
@@ -40,6 +39,7 @@ public class MenusController : MonoBehaviour
         firstPersonController.GetComponent<CharacterMotor>().enabled = true;
         firstPersonController.GetComponent<CharacterMotor>().canControl = true;
         firstPersonController.GetComponent<MouseLook>().enabled = true;
+        CursorManager.instance.UpdateCursor(true);
         mainCamera.GetComponent<MouseLook>().enabled = true;
     }
 

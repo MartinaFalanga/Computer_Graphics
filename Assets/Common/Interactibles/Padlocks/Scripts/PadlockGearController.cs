@@ -15,13 +15,6 @@ public class PadlockGearController : MonoBehaviour
     {
         if(value < 0 || value > 9)
             Debug.Log("Error: value must be in [0,9]");
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnMouseDown() {

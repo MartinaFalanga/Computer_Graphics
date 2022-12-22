@@ -9,12 +9,6 @@ public class InventoryController : MonoBehaviour
     public InventoryContainerBarController inventoryBar;
     private int currIndex = 0;
     private const int MAX_OBJECTS = 3;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -45,7 +39,7 @@ public class InventoryController : MonoBehaviour
 
     private void insertInInventoryBar(GameObject goToDuplicate, int currIndex) {
         GameObject go = GameObject.Instantiate(goToDuplicate);
-        inventoryBar.addObject(go, currIndex);
+        inventoryBar.AddObject(go, currIndex);
     }
 
     public void deleteObject(GameObject toDelete) {
