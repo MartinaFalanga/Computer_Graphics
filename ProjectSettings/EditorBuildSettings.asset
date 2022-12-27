@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Main_menu/Scenes/Main_menu.unity
     guid: 3a38b44c320ca1144a93f61c9e9ce51c
   - enabled: 1
+    path: Assets/JP_School corridor/Scene/School Corridor.unity
+    guid: fb3e30c563ba4a645a39229ba3eaf9b6
+  - enabled: 1
     path: Assets/JP_School restroom_V2/Scenes/School_Restroom_Night.unity
     guid: cea09c6bf6acffa40b2971072c31155e
   m_configObjects: {}

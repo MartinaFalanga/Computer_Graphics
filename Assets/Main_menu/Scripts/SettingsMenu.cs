@@ -17,7 +17,7 @@ public class SettingsMenu : MonoBehaviour
     public Toggle bloomToggle;
     private Resolution[] resolutions;
 
-    public void Start()
+        public void Start()
     {
         resolutions = Screen.resolutions;
         resolutionsDropdown.ClearOptions();

@@ -51,7 +51,7 @@ public class ClassicPadlockController : MonoBehaviour
     }
 
     public bool isInventoryValid() {
-        GameObject[] playerInventoryObjects = playerInventory.GetComponent<InventoryController>().gameObjects;
+        GameObject[] playerInventoryObjects = playerInventory.GetComponent<InventoryController>().inventoryObjects;
 
         GameObject[] requiredInventoryObjects = new GameObject[2];
 

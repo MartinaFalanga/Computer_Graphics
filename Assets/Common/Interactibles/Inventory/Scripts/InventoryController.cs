@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
 
-    public GameObject[] gameObjects;
+    public GameObject[] inventoryObjects;
     public InventoryContainerBarController inventoryBar;
     private int currIndex = 0;
     private const int MAX_OBJECTS = 3;
@@ -25,7 +25,7 @@ public class InventoryController : MonoBehaviour
     public void AddGameObject(GameObject go) {
         if(currIndex <MAX_OBJECTS) {
             Debug.Log("Inserting object in inventory");
-            gameObjects[currIndex] = go;
+            inventoryObjects[currIndex] = go;
             go.SetActive(false);
             insertInInventoryBar(go, currIndex);
             Debug.Log("Object inserted successfully");
@@ -45,16 +45,16 @@ public class InventoryController : MonoBehaviour
     public void deleteObject(GameObject toDelete) {
         int i = 0;
         bool deleted = false;
-        foreach(GameObject playerInventoryObject in gameObjects) {
+        foreach(GameObject playerInventoryObject in inventoryObjects) {
             if(playerInventoryObject != null) {
                 if(playerInventoryObject.name == toDelete.name) {
-                    gameObjects[i] = null;
+                    inventoryObjects[i] = null;
                     deleted = true;
                 }
             }
 
-            if(deleted && i<gameObjects.Length-1) {
-                gameObjects[i] = gameObjects[i+1];
+            if(deleted && i<inventoryObjects.Length-1) {
+                inventoryObjects[i] = inventoryObjects[i+1];
             }
             i++;
         }

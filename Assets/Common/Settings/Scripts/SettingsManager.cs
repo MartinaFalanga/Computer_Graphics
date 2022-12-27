@@ -7,10 +7,9 @@ using UnityEngine.Rendering.Universal;
 
 public class SettingsManager : MonoBehaviour
 {
-
-    public AudioManager audioManager;
-    public Colorblindness accessibilityManager;
     public static SettingsManager instance;
+    private AudioManager audioManager;
+    private Colorblindness accessibilityManager;
     private UnityEngine.Rendering.Universal.UniversalAdditionalCameraData cameraData;
     private Volume renderingVolume;
 
@@ -27,6 +26,8 @@ public class SettingsManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
+        audioManager = FindObjectOfType<AudioManager>();
+        accessibilityManager = FindObjectOfType<Colorblindness>();
         cameraData = FindObjectOfType<UniversalAdditionalCameraData>();
         cameraData.antialiasing = UnityEngine.Rendering.Universal.AntialiasingMode.None;
         renderingVolume = FindObjectOfType<Volume>();
