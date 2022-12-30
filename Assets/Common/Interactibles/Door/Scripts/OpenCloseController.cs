@@ -9,7 +9,6 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
     public GameObject otherDoorCollider;
     public bool isOpen = false;
     public bool isLocked = false;
-    [SerializeField] private bool pauseInteraction = false;
 
     private Animator anim;
     private Animator otherAnim;
@@ -20,7 +19,6 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
     }
 
     public void ExecuteLogic() {
-        pauseInteraction = true;
 
         if(isLocked) {
             FindObjectOfType<AudioManager>().Play("lockDoor");
@@ -30,7 +28,6 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
         }
 
         new WaitForSeconds(1 / speed);
-        pauseInteraction = false;
     }
 
     public void unLock() {

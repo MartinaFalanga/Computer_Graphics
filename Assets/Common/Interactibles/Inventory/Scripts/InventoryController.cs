@@ -24,7 +24,6 @@ public class InventoryController : MonoBehaviour
 
     public void AddGameObject(GameObject go) {
         if(currIndex <MAX_OBJECTS) {
-            Debug.Log("Inserting object in inventory");
             inventoryObjects[currIndex] = go;
             go.SetActive(false);
             insertInInventoryBar(go, currIndex);

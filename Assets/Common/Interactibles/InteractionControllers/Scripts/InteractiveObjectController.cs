@@ -75,12 +75,10 @@ public class InteractiveObjectController : MonoBehaviour
     }
 
     public void InteractionColliderEntered() {
-        Debug.Log("Interaction Collider Entered");
         this.isPlayerInInteractionCollider = true;
     }
 
     public void InteractionColliderExited() {
-        Debug.Log("Interaction Collider Exited");
         this.isPlayerInInteractionCollider = false;
 
         this.DismissInteractionMenu();
@@ -88,8 +86,6 @@ public class InteractiveObjectController : MonoBehaviour
     
     void OnMouseEnter()
     {
-        Debug.Log("Mouse Enter Object");
-
         GameObject player = GameObject.Find("First Person Controller").gameObject;
         this.isPlayerPointingWithMouse = true;
 
@@ -106,7 +102,6 @@ public class InteractiveObjectController : MonoBehaviour
 
     void OnMouseExit()
     {
-        Debug.Log("Mouse Exit Object");
         this.isPlayerPointingWithMouse = false;
 
         if(this.isPlayerInInteractionCollider) {

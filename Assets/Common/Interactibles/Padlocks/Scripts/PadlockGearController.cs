@@ -19,7 +19,6 @@ public class PadlockGearController : MonoBehaviour
 
     void OnMouseDown() {
         value = (value + 1) % 10;
-        Debug.Log("Clicked numeric padlock to value="+value);
         animator.Play("GearRotation" + value, 0,0.0f);
 
         GetComponent<AudioSource>().Play();

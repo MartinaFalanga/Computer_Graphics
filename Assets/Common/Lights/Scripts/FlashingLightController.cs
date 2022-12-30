@@ -1,48 +1,3 @@
-/*using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class FlashingLightController : MonoBehaviour
-{
-    public Light light;
-    public GameObject lamp;
-    public bool isFlickering = true;
-    public float timeDelay;
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (isFlickering == true)
-        {
-            StartCoroutine(FlickeringLight());
-        }
-    }
-
-    IEnumerator FlickeringLight()
-    {
-        isFlickering = false;
-        if(light != null) {
-            light.GetComponent<Light>().enabled = true;
-        }
-        lamp.GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
-        timeDelay = Random.Range(0.01f, 1.5f);
-        yield return new WaitForSeconds(timeDelay);
-
-        if (light != null)
-        {
-            light.GetComponent<Light>().enabled = false;
-        }
-        lamp.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
-        timeDelay = Random.Range(0.01f, 1.5f);
-        yield return new WaitForSeconds(timeDelay);
-        isFlickering = true;
-    }
-
-}*/
-
-
-
-
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
@@ -108,7 +63,10 @@ public class FlashingLightController : MonoBehaviour
             originalColor = lampMaterial.GetVector("_EmissionColor");
         }
         audiosource = lampObject.GetComponent<AudioSource>();
-        audiosource.Play();
+        if (audiosource != null)
+        {
+            audiosource.Play();
+        }
     }
 
     void Update()
@@ -142,7 +100,10 @@ public class FlashingLightController : MonoBehaviour
             {
                 lampMaterial.SetVector("_EmissionColor", originalColor * newVal);
 
-                audiosource.volume = audioManager.GetFixedVolumeForAudioSource(audiosource.name) * newVal;
+                if (audiosource != null && audioManager.audioSourcesToVolumes != null && audioManager.audioSourcesToVolumes.ContainsKey(audiosource.name))
+                {
+                    audiosource.volume = audioManager.GetFixedVolumeForAudioSource(audiosource.name) * newVal;
+                }
             }
             yield return new WaitForSeconds(Random.Range(0.3f, 1.0f));
         }

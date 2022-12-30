@@ -15,7 +15,7 @@ public class Footsteps : MonoBehaviour
                                     10.380f, 11.017f, 11.577f, 12.148f};
     private int currentStep = 0;
 
-    public GameObject camera;
+    public GameObject cameraObject;
 
     public GameObject phone;
 
@@ -48,12 +48,12 @@ public class Footsteps : MonoBehaviour
     // private methods
 
     private void StartBobbing() {
-        camera.GetComponent<Animator>().Play("HeadBobbing");
+        cameraObject.GetComponent<Animator>().Play("HeadBobbing");
         phone.GetComponent<Animator>().Play("PhoneShaking");
     }
 
     private void StopBobbing() {
-        camera.GetComponent<Animator>().Play("New State");
+        cameraObject.GetComponent<Animator>().Play("New State");
         phone.GetComponent<Animator>().Play("New State");
     }
 

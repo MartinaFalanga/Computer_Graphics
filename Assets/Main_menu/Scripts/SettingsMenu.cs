@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public SettingsManager settingsManager;
     public Scrollbar volumeScrollbar;
     public TMPro.TMP_Dropdown graphicsDropdown;
     public TMPro.TMP_Dropdown resolutionsDropdown;
@@ -15,9 +14,14 @@ public class SettingsMenu : MonoBehaviour
     public Toggle fullscreenToggle;
     public Toggle motionBlurToggle;
     public Toggle bloomToggle;
+    private SettingsManager settingsManager;
     private Resolution[] resolutions;
 
-        public void Start()
+    void Awake()
+    {
+        settingsManager = FindObjectOfType<SettingsManager>();
+    }
+    public void Start()
     {
         resolutions = Screen.resolutions;
         resolutionsDropdown.ClearOptions();

@@ -10,7 +10,7 @@ public class SettingsManager : MonoBehaviour
     public static SettingsManager instance;
     private AudioManager audioManager;
     private Colorblindness accessibilityManager;
-    private UnityEngine.Rendering.Universal.UniversalAdditionalCameraData cameraData;
+    private UniversalAdditionalCameraData cameraData;
     private Volume renderingVolume;
 
     void Awake()
@@ -21,24 +21,20 @@ public class SettingsManager : MonoBehaviour
         }
         else
         {
+            UpdateSettings();
             Destroy(gameObject);
             return;
         }
         DontDestroyOnLoad(gameObject);
-
-        audioManager = FindObjectOfType<AudioManager>();
-        accessibilityManager = FindObjectOfType<Colorblindness>();
-        cameraData = FindObjectOfType<UniversalAdditionalCameraData>();
-        cameraData.antialiasing = UnityEngine.Rendering.Universal.AntialiasingMode.None;
-        renderingVolume = FindObjectOfType<Volume>();
+        UpdateSettings();
     }
 
-    public void updateSettings()
+    public void UpdateSettings()
     {
+        SetInstanceValue(instance);
         cameraData = FindObjectOfType<UniversalAdditionalCameraData>();
-        cameraData.antialiasing = UnityEngine.Rendering.Universal.AntialiasingMode.None;
+        cameraData.antialiasing = AntialiasingMode.None;
         renderingVolume = FindObjectOfType<Volume>();
-        SetColorBlindnessMode(PlayerPrefs.GetInt("colorblindness"));
         SetAntiAliasing(PlayerPrefs.GetInt("antialiasingIndex"));
         QualitySettings.antiAliasing = PlayerPrefs.GetInt("antialiasingQuality");
         SetVolume(PlayerPrefs.GetFloat("volume"));
@@ -48,6 +44,17 @@ public class SettingsManager : MonoBehaviour
         SetVSync(PlayerPrefs.GetInt("vsync"));
         SetMotionBlur(PlayerPrefs.GetInt("motionBlur") == 1);
         SetBloom(PlayerPrefs.GetInt("bloom") == 1);
+        SetColorBlindnessMode(PlayerPrefs.GetInt("colorblindness"));
+    }
+
+    private void SetInstanceValue(SettingsManager currentInstance)
+    {
+        currentInstance.audioManager = AudioManager.instance;
+        audioManager.UpdateValues();
+        currentInstance.accessibilityManager = Colorblindness.Instance;
+        currentInstance.cameraData = FindObjectOfType<UniversalAdditionalCameraData>();
+        currentInstance.cameraData.antialiasing = AntialiasingMode.None;
+        currentInstance.renderingVolume = FindObjectOfType<Volume>();
     }
 
     public void SetVolume(float volume)
@@ -102,16 +109,16 @@ public class SettingsManager : MonoBehaviour
         {
             case 1:
                 QualitySettings.antiAliasing = 4;
-                cameraData.antialiasing = UnityEngine.Rendering.Universal.AntialiasingMode.FastApproximateAntialiasing;
+                cameraData.antialiasing = AntialiasingMode.FastApproximateAntialiasing;
                 break;
             case 2:
                 QualitySettings.antiAliasing = 8;
-                cameraData.antialiasing = UnityEngine.Rendering.Universal.AntialiasingMode.SubpixelMorphologicalAntiAliasing;
-                cameraData.antialiasingQuality = UnityEngine.Rendering.Universal.AntialiasingQuality.High;
+                cameraData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
+                cameraData.antialiasingQuality = AntialiasingQuality.High;
                 break;
             default:
                 QualitySettings.antiAliasing = 0;
-                cameraData.antialiasing = UnityEngine.Rendering.Universal.AntialiasingMode.None;
+                cameraData.antialiasing = AntialiasingMode.None;
                 break;
         }
         PlayerPrefs.SetInt("antialiasingIndex", antiAliasingIndex);
