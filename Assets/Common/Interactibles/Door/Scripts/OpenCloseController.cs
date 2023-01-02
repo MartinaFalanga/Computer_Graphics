@@ -9,6 +9,7 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
     public GameObject otherDoorCollider;
     public bool isOpen = false;
     public bool isLocked = false;
+    public bool isInverse = false;
 
     private Animator anim;
     private Animator otherAnim;
@@ -43,12 +44,13 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
         string clipName;
         anim.SetFloat("Speed", speed);
         anim.SetTrigger("OpenClose");
+        anim.SetBool("IsInverse", isInverse);
         if (otherAnim != null)
         {
             otherAnim.SetFloat("Speed", speed);
             otherAnim.SetTrigger("OpenClose");
+            otherAnim.SetBool("Inverse", isInverse);
         }
-
         switch (doorType)
         {
             case DoorType.Door: 
@@ -67,9 +69,9 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
         }
 
         if(isOpen) {
-            changeInteractionMenuText("F: Close");
+            changeInteractionMenuText("Premi F per chiudere");
         } else {
-            changeInteractionMenuText("F: Open");
+            changeInteractionMenuText("Premi F per aprire");
         }
     }
 

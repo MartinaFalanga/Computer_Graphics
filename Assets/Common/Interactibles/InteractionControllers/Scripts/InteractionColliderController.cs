@@ -28,7 +28,6 @@ public class InteractionColliderController : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Player exited collider");
             isCollidingWithPlayer = false;
             interactiveObjectController.InteractionColliderExited();
         }

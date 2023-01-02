@@ -24,6 +24,11 @@ public class CorridorDoorOpener : MonoBehaviour, IInteractiveObject
             GetComponent<InteractiveObjectController>().interactionMenuText = "Premi F per chiudere la porta";
             animatorLeft.Play("OpenDoorLeft", 0, 0.0f);
             animatorRight.Play("OpenDoorRight", 0, 0.0f);
+            SceneDoorController sceneDoorController = GetComponent<SceneDoorController>();
+            if (sceneDoorController != null)
+            {
+                sceneDoorController.ChangeScene();
+            }
         }
         doorsOpened = !doorsOpened;
     }

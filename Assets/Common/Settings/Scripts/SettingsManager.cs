@@ -11,7 +11,7 @@ public class SettingsManager : MonoBehaviour
     private AudioManager audioManager;
     private Colorblindness accessibilityManager;
     private UniversalAdditionalCameraData cameraData;
-    private Volume renderingVolume;
+    private Volume[] renderingVolumes;
 
     void Awake()
     {
@@ -26,15 +26,14 @@ public class SettingsManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        UpdateSettings();
     }
 
     public void UpdateSettings()
     {
-        SetInstanceValue(instance);
+        SetInstanceValue();
         cameraData = FindObjectOfType<UniversalAdditionalCameraData>();
         cameraData.antialiasing = AntialiasingMode.None;
-        renderingVolume = FindObjectOfType<Volume>();
+        renderingVolumes = FindObjectsOfType<Volume>();
         SetAntiAliasing(PlayerPrefs.GetInt("antialiasingIndex"));
         QualitySettings.antiAliasing = PlayerPrefs.GetInt("antialiasingQuality");
         SetVolume(PlayerPrefs.GetFloat("volume"));
@@ -47,14 +46,14 @@ public class SettingsManager : MonoBehaviour
         SetColorBlindnessMode(PlayerPrefs.GetInt("colorblindness"));
     }
 
-    private void SetInstanceValue(SettingsManager currentInstance)
+    private void SetInstanceValue()
     {
-        currentInstance.audioManager = AudioManager.instance;
+        audioManager = AudioManager.instance;
         audioManager.UpdateValues();
-        currentInstance.accessibilityManager = Colorblindness.Instance;
-        currentInstance.cameraData = FindObjectOfType<UniversalAdditionalCameraData>();
-        currentInstance.cameraData.antialiasing = AntialiasingMode.None;
-        currentInstance.renderingVolume = FindObjectOfType<Volume>();
+        accessibilityManager = Colorblindness.Instance;
+        cameraData = FindObjectOfType<UniversalAdditionalCameraData>();
+        cameraData.antialiasing = AntialiasingMode.None;
+        renderingVolumes = FindObjectsOfType<Volume>();
     }
 
     public void SetVolume(float volume)
@@ -84,10 +83,12 @@ public class SettingsManager : MonoBehaviour
     public void SetMotionBlur(bool isMotionBlurActive)
     {
         MotionBlur tmpBlur, motionBlur;
-        if (renderingVolume.profile.TryGet<MotionBlur>(out tmpBlur))
-        {
-            motionBlur = tmpBlur;
-            motionBlur.active = isMotionBlurActive;
+        foreach (Volume rv in renderingVolumes) {
+            if (rv.profile.TryGet<MotionBlur>(out tmpBlur))
+            {
+                motionBlur = tmpBlur;
+                motionBlur.active = isMotionBlurActive;
+            }
         }
         PlayerPrefs.SetInt("motionBlur", isMotionBlurActive ? 1 : 0);
     }
@@ -95,10 +96,13 @@ public class SettingsManager : MonoBehaviour
     public void SetBloom(bool isBloomActive)
     {
         Bloom tmpBloom, bloom;
-        if (renderingVolume.profile.TryGet<Bloom>(out tmpBloom))
+        foreach (Volume rv in renderingVolumes)
         {
-            bloom = tmpBloom;
-            bloom.active = isBloomActive;
+            if (rv.profile.TryGet<Bloom>(out tmpBloom))
+            {
+                bloom = tmpBloom;
+                bloom.active = isBloomActive;
+            }
         }
         PlayerPrefs.SetInt("bloom", isBloomActive ? 1 : 0);
     }
