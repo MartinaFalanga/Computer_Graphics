@@ -15,13 +15,15 @@ public class InteractiveObjectController : MonoBehaviour
 
     public Material emissionMaterial;
 
-    private bool isPlayerInInteractionCollider;
+    public bool isPlayerInInteractionCollider;
 
     private bool isPlayerPointingWithMouse;
 
     public GameObject interactionCollider;
 
     private Color originalEmissionColor;
+
+    public bool interactionOnce;
 
     void Start() {
         interactionCollider.GetComponent<InteractionColliderController>().SetInteractiveObjectController(this);
@@ -49,9 +51,17 @@ public class InteractiveObjectController : MonoBehaviour
                     gameObject.GetComponent<InteractiveRadioController>().ExecuteLogic();                
                 }
             
-                DismissInteractionMenu();  
+                DismissInteractionMenu();
+
+                if (interactionOnce)
+                {
+                    interactionCollider.SetActive(false);
+                    isPlayerInInteractionCollider = false;
+                }
+
             }
         }
+
     }
 
     public void InteractionColliderEntered() {

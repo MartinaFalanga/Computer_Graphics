@@ -34,7 +34,7 @@ public class ClockRotation : MonoBehaviour
 
     private void PlayerInputClock ()
     {
-        if (Input.GetKeyDown(KeyCode.G) && !isTimeChanging) 
+        if (Input.GetKeyDown(KeyCode.G) && !isTimeChanging && GetComponent<InteractiveObjectController>().isPlayerInInteractionCollider) 
         {
             timeAtStartAnim = day;
             currentTimeChangeSeconds = 0;
