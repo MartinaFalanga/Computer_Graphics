@@ -6,4 +6,9 @@ public class SceneLoaderProxy : MonoBehaviour
     {
         SceneLoader.instance.LoadScene(sceneIndex);
     }
+
+    public void LoadSceneFromSavings()
+    {
+        SceneLoader.instance.LoadSceneFromSavings();
+    }
 }

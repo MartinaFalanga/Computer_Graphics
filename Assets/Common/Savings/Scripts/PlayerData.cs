@@ -7,16 +7,10 @@ public class PlayerData
 {
     public int currentSceneIndex;
     public float[] position;
-    public GameObject[] inventoryObjects;
-
-    public PlayerData(Player player)
+    public CatchableObjectData[] inventoryObjectData;
+    public SerializableDictionary<string, bool> catchableItemsCollected;
+    public PlayerData()
     {
-        position = new float[3];
-        position[0] = player.transform.position.x;
-        position[1] = player.transform.position.y;
-        position[2] = player.transform.position.z;
-
-        InventoryController inventory = player.GetComponentInChildren<InventoryController>();
-        inventoryObjects = inventory.inventoryObjects;
+        catchableItemsCollected = new();
     }
 }

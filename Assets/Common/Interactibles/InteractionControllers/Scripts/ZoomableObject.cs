@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /** script per impostazioni angolo e scale dell'oggetto da mostrare a schermo quando l'utente vuole interagire con esso */
-public class ZoomableObjectController : MonoBehaviour, IInteractiveObject
+public class ZoomableObject : MonoBehaviour, IInteractiveObject
 {
     public Vector3 position;
     public Vector3 angle;
@@ -15,7 +15,7 @@ public class ZoomableObjectController : MonoBehaviour, IInteractiveObject
     public GameObject zoomableObjectMenu;
 
     public void ExecuteLogic() {
-        Debug.Log("ZoomableObjectController - ExecuteLogic");
+        Debug.Log("ZoomableObject - ExecuteLogic");
         
         zoomableObjectMenu.SetActive(true);
         zoomableObjectMenu.GetComponent<ObjectZoomInteractionMenuController>().showObject(gameObject);

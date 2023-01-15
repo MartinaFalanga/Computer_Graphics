@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractiveRadioController : MonoBehaviour, IInteractiveObject
+public class InteractiveRadio : MonoBehaviour, IInteractiveObject
 {
 
     public void ExecuteLogic() {

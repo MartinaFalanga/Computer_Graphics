@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ElectricSwitchController : MonoBehaviour, IInteractiveObject
+public class ElectricSwitch : MonoBehaviour, IInteractiveObject
 {
 
     public GameObject[] lamps;

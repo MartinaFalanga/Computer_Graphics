@@ -6,7 +6,7 @@ public class ClassicPadlockController : MonoBehaviour
 {
     private GameObject lockedGameObject;
 
-    private GameObject[] goRequiredInventoryObj;
+    private CatchableObject[] goRequiredInventoryObj;
 
     public GameObject padlockMenuBar;
 
@@ -34,36 +34,36 @@ public class ClassicPadlockController : MonoBehaviour
     public void setActualGameObject(GameObject go) {
         this.lockedGameObject = go;
 
-        GameObject[] goRequiredInventory = go.GetComponent<LockedDoorController>().requiredInventory;
-        goRequiredInventoryObj = new GameObject[goRequiredInventory.Length];
+        CatchableObject[] goRequiredInventory = go.GetComponent<LockedDoor>().requiredInventory;
+        goRequiredInventoryObj = new CatchableObject[goRequiredInventory.Length];
 
         int i = 0;
-        foreach(GameObject goRequiredInventoryGameObject in goRequiredInventory) {
+        foreach(CatchableObject goRequiredInventoryGameObject in goRequiredInventory) {
             Debug.Log("Putting " + goRequiredInventoryGameObject.name + " in required inventory");
             goRequiredInventoryObj[i] = Instantiate(goRequiredInventoryGameObject);
             goRequiredInventoryObj[i].transform.SetParent(padlockMenuBar.transform.GetChild(i));
             goRequiredInventoryObj[i].transform.localPosition = new Vector3(0,0,0);
             goRequiredInventoryObj[i].transform.localScale = goRequiredInventoryObj[i].GetComponent<RequiredInventoryDimensionsController>().scale;
             goRequiredInventoryObj[i].transform.eulerAngles = goRequiredInventoryObj[i].GetComponent<RequiredInventoryDimensionsController>().angle;
-            goRequiredInventoryObj[i].layer = LayerMask.NameToLayer("UI");
+            goRequiredInventoryObj[i].gameObject.layer = LayerMask.NameToLayer("UI");
             i++;
         }
     }
 
     public bool isInventoryValid() {
-        GameObject[] playerInventoryObjects = playerInventory.GetComponent<InventoryController>().inventoryObjects;
+        CatchableObject[] playerInventoryObjects = playerInventory.GetComponent<InventoryController>().inventoryObjects;
 
-        GameObject[] requiredInventoryObjects = new GameObject[2];
+        CatchableObject[] requiredInventoryObjects = new CatchableObject[2];
 
         int i = 0;
-        foreach(GameObject go in goRequiredInventoryObj) {
+        foreach(CatchableObject go in goRequiredInventoryObj) {
             requiredInventoryObjects[i] = go;
             i++;
         }
         
-        foreach(GameObject requiredObject in requiredInventoryObjects) {
+        foreach(CatchableObject requiredObject in requiredInventoryObjects) {
             bool isInInventory = false;
-            foreach(GameObject playerInventoryObject in playerInventoryObjects) {
+            foreach(CatchableObject playerInventoryObject in playerInventoryObjects) {
                 if(playerInventoryObject != null) {
                     if(playerInventoryObject.name == requiredObject.name)
                         isInInventory = true;
@@ -74,7 +74,7 @@ public class ClassicPadlockController : MonoBehaviour
                 return false;
         }
 
-        foreach(GameObject requiredObject in requiredInventoryObjects) {
+        foreach(CatchableObject requiredObject in requiredInventoryObjects) {
             playerInventory.GetComponent<InventoryController>().deleteObject(requiredObject);
         }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LockedDoorController : MonoBehaviour
+public class LockedDoor : MonoBehaviour
 {
 
     public GameObject[] unlockableObjects;
@@ -19,7 +19,7 @@ public class LockedDoorController : MonoBehaviour
 
     private LockType lockType;
 
-    public GameObject[] requiredInventory;
+    public CatchableObject[] requiredInventory;
 
     public int[] combination;
 
@@ -37,11 +37,9 @@ public class LockedDoorController : MonoBehaviour
 
         switch (lockType) {
             case LockType.CombinationThree:
-                Debug.Log("combination lock three");
                 combinationPadlock.GetComponent<CombinationThreePadlockController>().setActualGameObject(gameObject);
                 break;
-            case LockType.Classic:                
-                Debug.Log("combination classic");
+            case LockType.Classic:
                 classicPadlock.GetComponent<ClassicPadlockController>().setActualGameObject(gameObject);
                 if(classicPadlock.GetComponent<ClassicPadlockController>().isInventoryValid()) {
                     unLock();
@@ -54,7 +52,7 @@ public class LockedDoorController : MonoBehaviour
     public void unLock() {
         foreach(GameObject unlockableObject in unlockableObjects) {
             unlockableObject.GetComponent<InteractiveObjectController>().interactionCollider.GetComponent<BoxCollider>().enabled = true;
-            unlockableObject.GetComponent<CatchableObjectController>().unLock();
+            unlockableObject.GetComponent<CatchableObject>().unLock();
         }
         gameObject.GetComponent<OpenCloseController>().unLock();
         menusCanvas.GetComponent<MenusController>().DismissAll();

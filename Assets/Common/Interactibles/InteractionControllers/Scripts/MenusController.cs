@@ -20,7 +20,6 @@ public class MenusController : MonoBehaviour
     
     public void DismissAll()
     {
-        Debug.Log("Dismissing all menus");
         DismissMenus();
         UnlockPlayer();
         mainCamera.GetComponent<Camera>().depth = 2;

@@ -39,6 +39,13 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(UpdateScene());
     }
 
+    public void LoadSceneFromSavings()
+    {
+        StartCoroutine(LoadSceneFromSavingsAsync());
+        StartCoroutine(UpdateScene());
+        StartCoroutine(LoadPlayerAsync());
+    }
+
     public IEnumerator LoadSceneAsync(int sceneIndex)
     {
         transition.SetTrigger("startTransition");
@@ -47,19 +54,41 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
         sceneChanged = false;
         transition.SetTrigger("endTransition");
-        Debug.Log("SceneLoader - Fine LoadSceneAsync");
+    }
+
+    public IEnumerator LoadSceneFromSavingsAsync()
+    {
+        transition.SetTrigger("startTransition");
+        sceneChanged = true;
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene(SavingController.playerData.currentSceneIndex);
+        sceneChanged = false;
+        transition.SetTrigger("endTransition");
     }
 
     public IEnumerator UpdateScene()
     {
         yield return new WaitForSeconds(transitionTime + 0.1f);
         SetUpdatesInScene();
-        Debug.Log("SceneLoader - Fine UpdateAudioManager");
+    }
+
+    public IEnumerator LoadPlayerAsync()
+    {
+        yield return new WaitForSeconds(transitionTime + 0.1f);
+        SavingController.instance.LoadGame();
+        /*Player player = FindObjectOfType<Player>();
+        Debug.Log("Player: " + player);
+        if (player != null && playerData != null)
+        {
+            player.LoadData(playerData);
+            Debug.Log("Caricamento completato!");
+        }*/
     }
 
     private void SetUpdatesInScene()
     {
         AudioManager.instance.UpdateValues();
         SettingsManager.instance.UpdateSettings();
+        SavingController.instance.UpdateAllDataPersistenceObjects();
     }
 }

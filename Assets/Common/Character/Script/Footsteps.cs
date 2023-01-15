@@ -52,8 +52,16 @@ public class Footsteps : MonoBehaviour
     }
 
     private void StopBobbing() {
-        cameraObject.GetComponent<Animator>().Play("New State");
-        phone.GetComponent<Animator>().Play("New State");
+        Animator cameraFootstepAnimator = cameraObject.GetComponent<Animator>();
+        if(cameraFootstepAnimator != null)
+        {
+            cameraFootstepAnimator.Play("New State");
+        }
+        Animator phoneFootstepAnimator = cameraObject.GetComponent<Animator>();
+        if (phoneFootstepAnimator != null)
+        {
+            phoneFootstepAnimator.Play("New State");
+        }
     }
 
 

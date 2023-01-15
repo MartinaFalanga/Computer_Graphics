@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CorridorDoorOpener : MonoBehaviour, IInteractiveObject
+public class CorridorDoor : MonoBehaviour, IInteractiveObject
 {
 
     public GameObject doorLeft;

@@ -6,7 +6,7 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
 
     public float speed = 1;
     public DoorType doorType;
-    public GameObject otherDoorCollider;
+    public GameObject otherDoorController;
     public bool isOpen = false;
     public bool isLocked = false;
     public bool isInverse = false;
@@ -16,7 +16,7 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
 
     void Start() {
         anim = this.GetComponentInParent<Animator>();
-        otherAnim = otherDoorCollider != null ? otherDoorCollider.GetComponentInParent<Animator>() : null;
+        otherAnim = otherDoorController != null ? otherDoorController.GetComponentInParent<Animator>() : null;
     }
 
     public void ExecuteLogic() {
@@ -76,11 +76,19 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
     }
 
     private void showPadlock() {
-        gameObject.GetComponent<LockedDoorController>().showPadlock();
+        gameObject.GetComponent<LockedDoor>().showPadlock();
     }
 
     private void changeInteractionMenuText(string text) {
-        gameObject.GetComponent<InteractiveObjectController>().interactionMenuText = text;
+        InteractiveObjectController ioc = gameObject.GetComponent<InteractiveObjectController>();
+        if(ioc == null)
+        {
+            ioc = gameObject.GetComponentInParent<InteractiveObjectController>();
+        }
+        if(ioc != null)
+        {
+            ioc.interactionMenuText = text;
+        }
     }
 
 }

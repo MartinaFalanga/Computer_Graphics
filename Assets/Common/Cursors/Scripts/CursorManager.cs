@@ -7,6 +7,7 @@ public class CursorManager : MonoBehaviour
 
     public bool isLockedToTheCenter;
     public static CursorManager instance;
+    public AudioSource clickSound;
 
     void Awake()
     {

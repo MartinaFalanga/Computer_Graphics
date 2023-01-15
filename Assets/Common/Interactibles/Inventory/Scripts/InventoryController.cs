@@ -2,33 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class InventoryController : MonoBehaviour
 {
-
-    public GameObject[] inventoryObjects;
+    public CatchableObject[] inventoryObjects;
     public InventoryContainerBarController inventoryBar;
-    private int currIndex = 0;
-    private const int MAX_OBJECTS = 3;
+    private int numOfItems = 0;
+    private const int MAX_OBJECTS = 5;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            inventoryBar.transform.parent.gameObject.SetActive(true);
-        } else if (Input.GetKeyDown(KeyCode.Q))
-        {
-            //inventoryBar.transform.parent.gameObject.SetActive(false);
-        }
-    }
-
-    public void AddGameObject(GameObject go) {
-        if(currIndex <MAX_OBJECTS) {
-            inventoryObjects[currIndex] = go;
-            go.SetActive(false);
-            insertInInventoryBar(go, currIndex);
+    public void AddGameObject(CatchableObject go) {
+        if(numOfItems < MAX_OBJECTS) {
+            inventoryObjects[numOfItems] = go;
+            insertInInventoryBar(go.name, numOfItems);
             Debug.Log("Object inserted successfully");
-            currIndex++;
+            numOfItems++;
         } else {
             Debug.Log("Can't insert game object in your inventory. FULL INVENTORY");
         }
@@ -36,15 +23,16 @@ public class InventoryController : MonoBehaviour
 
     /** private methods */
 
-    private void insertInInventoryBar(GameObject goToDuplicate, int currIndex) {
-        GameObject go = GameObject.Instantiate(goToDuplicate);
-        inventoryBar.AddObject(go, currIndex);
+    private void insertInInventoryBar(string objectName, int currIndex) {
+        Debug.Log("ObjectName: " + objectName);
+        GameObject prefab = Instantiate(Resources.Load<GameObject>("Prefabs/" + objectName)) as GameObject;
+        inventoryBar.AddObject(prefab, currIndex);
     }
 
-    public void deleteObject(GameObject toDelete) {
+    public void deleteObject(CatchableObject toDelete) {
         int i = 0;
         bool deleted = false;
-        foreach(GameObject playerInventoryObject in inventoryObjects) {
+        foreach(CatchableObject playerInventoryObject in inventoryObjects) {
             if(playerInventoryObject != null) {
                 if(playerInventoryObject.name == toDelete.name) {
                     inventoryObjects[i] = null;
@@ -57,5 +45,15 @@ public class InventoryController : MonoBehaviour
             }
             i++;
         }
+    }
+}
+
+[System.Serializable]
+public class InventorySlot
+{
+    public ItemObject item;
+    public InventorySlot(ItemObject _item)
+    {
+        item = _item;
     }
 }

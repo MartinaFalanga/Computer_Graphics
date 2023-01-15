@@ -20,9 +20,9 @@ public class ObjectZoomInteractionMenuController : MonoBehaviour, ISingleMenuCon
         GameObject goClone = Instantiate(go);
         goClone.transform.SetParent(gameObject.transform.GetChild(0));
 
-        goClone.transform.localPosition = go.GetComponent<ZoomableObjectController>().position;
-        goClone.transform.localScale = go.GetComponent<ZoomableObjectController>().scale;
-        goClone.transform.eulerAngles = go.GetComponent<ZoomableObjectController>().angle;
+        goClone.transform.localPosition = go.GetComponent<ZoomableObject>().position;
+        goClone.transform.localScale = go.GetComponent<ZoomableObject>().scale;
+        goClone.transform.eulerAngles = go.GetComponent<ZoomableObject>().angle;
 
         int layer = LayerMask.NameToLayer("UI");
 
@@ -31,7 +31,7 @@ public class ObjectZoomInteractionMenuController : MonoBehaviour, ISingleMenuCon
 
         SetGameLayerRecursive(goClone, layer);
 
-        menuLight.GetComponent<Light>().intensity = go.GetComponent<ZoomableObjectController>().menuLightIntensity;
+        menuLight.GetComponent<Light>().intensity = go.GetComponent<ZoomableObject>().menuLightIntensity;
     }
 
 
