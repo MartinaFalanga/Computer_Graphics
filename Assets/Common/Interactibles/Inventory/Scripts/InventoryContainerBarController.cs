@@ -15,8 +15,8 @@ public class InventoryContainerBarController : MonoBehaviour
         go.transform.localPosition = Vector3.zero;
         go.transform.Rotate(0, 0, go.transform.localPosition.y);
 
-        go.transform.eulerAngles = go.GetComponent<CatchableObjectController>().angleInInventory;
-        go.transform.localScale = go.GetComponent<CatchableObjectController>().scaleInInventory;
+        go.transform.eulerAngles = go.GetComponent<CatchableObject>().angleInInventory;
+        go.transform.localScale = go.GetComponent<CatchableObject>().scaleInInventory;
         go.transform.localScale += new Vector3(600, 600, 600);
     }
 

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Footsteps : MonoBehaviour
 {
-
-    public AudioSource footstepSource;
-
     private bool isFootstepPlaying;
 
     private const int NSTEPS = 22;
@@ -14,20 +11,22 @@ public class Footsteps : MonoBehaviour
                                     5.536f, 5.986f, 6.448f, 7.085f, 7.667f, 8.249f, 8.776f, 9.259f, 9.863f,
                                     10.380f, 11.017f, 11.577f, 12.148f};
     private int currentStep = 0;
+    private AudioSource footstepSource;
+    private GameObject cameraObject;
+    private GameObject phone;
 
-    public GameObject camera;
-
-    public GameObject phone;
-
-    // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
+        footstepSource = GetComponent<AudioSource>();
+        cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
+        phone = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)) {
+        if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) ||
+           Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) {
             isFootstepPlaying = true;
 
             if(footstepSource.time > stepCompleteSort[currentStep]) {
@@ -48,13 +47,21 @@ public class Footsteps : MonoBehaviour
     // private methods
 
     private void StartBobbing() {
-        camera.GetComponent<Animator>().Play("HeadBobbing");
+        cameraObject.GetComponent<Animator>().Play("HeadBobbing");
         phone.GetComponent<Animator>().Play("PhoneShaking");
     }
 
     private void StopBobbing() {
-        camera.GetComponent<Animator>().Play("New State");
-        phone.GetComponent<Animator>().Play("New State");
+        Animator cameraFootstepAnimator = cameraObject.GetComponent<Animator>();
+        if(cameraFootstepAnimator != null)
+        {
+            cameraFootstepAnimator.Play("New State");
+        }
+        Animator phoneFootstepAnimator = cameraObject.GetComponent<Animator>();
+        if (phoneFootstepAnimator != null)
+        {
+            phoneFootstepAnimator.Play("New State");
+        }
     }
 
 

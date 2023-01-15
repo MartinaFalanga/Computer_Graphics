@@ -57,16 +57,16 @@ namespace SOHNE.Accessibility.Colorblindness
         {
             if (Instance == null)
             {
+                maxType = (int)System.Enum.GetValues(typeof(ColorblindTypes)).Cast<ColorblindTypes>().Last();
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else if (Instance != this)
             {
+                maxType = (int)System.Enum.GetValues(typeof(ColorblindTypes)).Cast<ColorblindTypes>().Last();
                 Destroy(gameObject);
                 return;
             }
-
-            maxType = (int) System.Enum.GetValues(typeof(ColorblindTypes)).Cast<ColorblindTypes>().Last();
+            DontDestroyOnLoad(gameObject);
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)

@@ -36,19 +36,17 @@ public class CombinationThreePadlockController : MonoBehaviour
         int valueSecondGear = secondGear.GetComponent<PadlockGearController>().value;
         int valueThirdGear = thirdGear.GetComponent<PadlockGearController>().value;
 
-        Debug.Log("Trying to unlock with first=" + valueFirstGear + ", second=" + valueSecondGear + "third=" + valueThirdGear);
-
         if(valueFirstGear == firstNumUnlock && valueSecondGear == secondNumUnlock && valueThirdGear == thirdNumUnlock) {
             Debug.Log("Padlock unlocked");
-            this.lockedGameObject.GetComponent<LockedDoorController>().unLock();
+            this.lockedGameObject.GetComponent<LockedDoor>().unLock();
         }
     }
 
     public void setActualGameObject(GameObject go) {
         this.lockedGameObject = go;
-        this.firstNumUnlock = lockedGameObject.GetComponent<LockedDoorController>().combination[0];
-        this.secondNumUnlock = lockedGameObject.GetComponent<LockedDoorController>().combination[1];
-        this.thirdNumUnlock = lockedGameObject.GetComponent<LockedDoorController>().combination[2];
+        this.firstNumUnlock = lockedGameObject.GetComponent<LockedDoor>().combination[0];
+        this.secondNumUnlock = lockedGameObject.GetComponent<LockedDoor>().combination[1];
+        this.thirdNumUnlock = lockedGameObject.GetComponent<LockedDoor>().combination[2];
     }
 
     /** private methods */

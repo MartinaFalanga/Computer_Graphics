@@ -1,0 +1,27 @@
+{
+    "currentSceneIndex": 1,
+    "position": [
+        -18.304983139038087,
+        -3.3328139781951906,
+        -0.40562015771865847
+    ],
+    "inventoryObjectData": [
+        {
+            "prefabName": "oldkey",
+            "type": 0,
+            "angleInInventory": {
+                "x": 0.0,
+                "y": 15.0,
+                "z": -27.0
+            },
+            "scaleInInventory": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "isInInventory": true,
+            "isLocked": false,
+            "inScene": true
+        }
+    ]
+}

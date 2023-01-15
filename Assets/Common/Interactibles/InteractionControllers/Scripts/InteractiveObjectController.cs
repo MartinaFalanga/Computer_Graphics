@@ -39,30 +39,14 @@ public class InteractiveObjectController : MonoBehaviour
         if(isPlayerInInteractionCollider && isPlayerPointingWithMouse) {
             if(Input.GetKeyDown(KeyCode.F)) {
 
-                if(gameObject.GetComponent<ZoomableObjectController>() != null) {
-                    gameObject.GetComponent<ZoomableObjectController>().ExecuteLogic();
+                if(gameObject.GetComponent<IInteractiveObject>() != null) {
+                    gameObject.GetComponent<IInteractiveObject>().ExecuteLogic();                
+                }
+                else if (gameObject.GetComponentInChildren<IInteractiveObject>() != null)
+                {
+                    gameObject.GetComponentInChildren<IInteractiveObject>().ExecuteLogic();
                 }
 
-                if(gameObject.GetComponent<OpenCloseController>() != null) {
-                    gameObject.GetComponent<OpenCloseController>().ExecuteLogic();
-                }
-
-                if(gameObject.GetComponent<CatchableObjectController>() != null) {
-                    gameObject.GetComponent<CatchableObjectController>().ExecuteLogic();                
-                }
-
-                if(gameObject.GetComponent<InteractiveRadioController>() != null) {
-                    gameObject.GetComponent<InteractiveRadioController>().ExecuteLogic();                
-                }
-
-                if(gameObject.GetComponent<CorridorDoorOpener>() != null) {
-                    gameObject.GetComponent<CorridorDoorOpener>().ExecuteLogic();                
-                }
-
-                if(gameObject.GetComponent<ElectricSwitchController>() != null) {
-                    gameObject.GetComponent<ElectricSwitchController>().ExecuteLogic();
-                }
-            
                 DismissInteractionMenu();
 
                 if (interactionOnce) {
@@ -75,12 +59,10 @@ public class InteractiveObjectController : MonoBehaviour
     }
 
     public void InteractionColliderEntered() {
-        Debug.Log("Interaction Collider Entered");
         this.isPlayerInInteractionCollider = true;
     }
 
     public void InteractionColliderExited() {
-        Debug.Log("Interaction Collider Exited");
         this.isPlayerInInteractionCollider = false;
 
         this.DismissInteractionMenu();
@@ -88,8 +70,6 @@ public class InteractiveObjectController : MonoBehaviour
     
     void OnMouseEnter()
     {
-        Debug.Log("Mouse Enter Object");
-
         GameObject player = GameObject.Find("First Person Controller").gameObject;
         this.isPlayerPointingWithMouse = true;
 
@@ -106,7 +86,6 @@ public class InteractiveObjectController : MonoBehaviour
 
     void OnMouseExit()
     {
-        Debug.Log("Mouse Exit Object");
         this.isPlayerPointingWithMouse = false;
 
         if(this.isPlayerInInteractionCollider) {

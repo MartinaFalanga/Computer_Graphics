@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class PlayerData
 {
     public int currentSceneIndex;
     public float[] position;
-
-    /*public PlayerData(Player player)
+    public CatchableObjectData[] inventoryObjectData;
+    public SerializableDictionary<string, bool> catchableItemsCollected;
+    public PlayerData()
     {
-        position = new float[3];
-        position[0] = player.transform.position.x;
-    }*/
+        catchableItemsCollected = new();
+    }
 }

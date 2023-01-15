@@ -17,7 +17,6 @@ public class InteractionColliderController : MonoBehaviour
     {        
         if (other.tag == "Player")
         {
-            Debug.Log("Player entered collider");
             isCollidingWithPlayer = true;
             interactiveObjectController.InteractionColliderEntered();
         }
@@ -29,7 +28,6 @@ public class InteractionColliderController : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Player exited collider");
             isCollidingWithPlayer = false;
             interactiveObjectController.InteractionColliderExited();
         }
