@@ -8,11 +8,6 @@ public class FPSInputController : MonoBehaviour
 {
 	private CharacterMotor motor;
 
-	void Start()
-    {
-		Cursor.lockState = CursorLockMode.Locked;
-	}
-
 	// Use this for initialization
 	void Awake()
 	{

@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-public enum Pivot { LEFT, RIGHT };
-
 public class OpenCloseController : MonoBehaviour, IInteractiveObject
 {
 
@@ -12,8 +10,6 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
     public bool isOpen = false;
     public bool isLocked = false;
     public bool isInverse = false;
-    public Pivot pivot;
-    [SerializeField] private bool pauseInteraction = false;
 
     private Animator anim;
     private Animator otherAnim;
@@ -49,16 +45,11 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
         anim.SetFloat("Speed", speed);
         anim.SetTrigger("OpenClose");
         anim.SetBool("IsInverse", isInverse);
-        anim.SetBool("left",pivot==Pivot.LEFT);
-        anim.SetBool("right", pivot == Pivot.RIGHT);
-
         if (otherAnim != null)
         {
             otherAnim.SetFloat("Speed", speed);
             otherAnim.SetTrigger("OpenClose");
             otherAnim.SetBool("Inverse", isInverse);
-            otherAnim.SetBool("left", pivot == Pivot.LEFT);
-            otherAnim.SetBool("right", pivot == Pivot.RIGHT);
         }
         switch (doorType)
         {

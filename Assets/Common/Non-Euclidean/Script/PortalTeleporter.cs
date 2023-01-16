@@ -7,8 +7,6 @@ public class PortalTeleporter : MonoBehaviour
     public Transform player;
     public Transform reciever;
 
-    public int addiionalRotationDiff;
-
     private bool playerIsOverlapping = false;
 
     // Update is called once per frame
@@ -25,7 +23,7 @@ public class PortalTeleporter : MonoBehaviour
                 Debug.Log("Entrato nel portale");
                 //perciò va teletrasportato
                 float rotationDiff = -Quaternion.Angle(transform.rotation, reciever.rotation);
-                rotationDiff += 180 + addiionalRotationDiff;
+                rotationDiff += 180;
                 player.Rotate(Vector3.up, rotationDiff);
 
                 Vector3 positionOffset = Quaternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
