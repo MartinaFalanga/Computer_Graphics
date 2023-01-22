@@ -1,8 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-
-using SOHNE.Accessibility.Colorblindness;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,8 +37,12 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadSceneFromSavings()
     {
-        StartCoroutine(LoadSceneFromSavingsAsync());
-        StartCoroutine(UpdateScene());
+        if (SavingController.playerData == null)
+        {
+            Debug.LogError("Nessun salvataggio trovato.");
+            return;
+        }
+        LoadScene(SavingController.playerData.currentSceneIndex);
         StartCoroutine(LoadPlayerAsync());
     }
 
@@ -56,16 +56,6 @@ public class SceneLoader : MonoBehaviour
         transition.SetTrigger("endTransition");
     }
 
-    public IEnumerator LoadSceneFromSavingsAsync()
-    {
-        transition.SetTrigger("startTransition");
-        sceneChanged = true;
-        yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(SavingController.playerData.currentSceneIndex);
-        sceneChanged = false;
-        transition.SetTrigger("endTransition");
-    }
-
     public IEnumerator UpdateScene()
     {
         yield return new WaitForSeconds(transitionTime + 0.1f);
@@ -75,14 +65,10 @@ public class SceneLoader : MonoBehaviour
     public IEnumerator LoadPlayerAsync()
     {
         yield return new WaitForSeconds(transitionTime + 0.1f);
-        SavingController.instance.LoadGame();
-        /*Player player = FindObjectOfType<Player>();
-        Debug.Log("Player: " + player);
-        if (player != null && playerData != null)
+        if (SavingController.playerData != null)
         {
-            player.LoadData(playerData);
-            Debug.Log("Caricamento completato!");
-        }*/
+            SavingController.instance.LoadGame();
+        }
     }
 
     private void SetUpdatesInScene()
@@ -90,5 +76,6 @@ public class SceneLoader : MonoBehaviour
         AudioManager.instance.UpdateValues();
         SettingsManager.instance.UpdateSettings();
         SavingController.instance.UpdateAllDataPersistenceObjects();
+        InventoryController.instance.insertItemsInInventoryBar();
     }
 }

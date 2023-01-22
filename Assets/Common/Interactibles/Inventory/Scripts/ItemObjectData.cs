@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,7 +9,7 @@ public enum ItemType
 
 
 [System.Serializable]
-public class ItemObject
+public class ItemObjectData
 {
     public string prefabName;
     public ItemType type;

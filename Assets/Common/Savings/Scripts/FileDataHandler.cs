@@ -14,7 +14,6 @@ public class FileDataHandler : MonoBehaviour
         this.dataDirPath = dataDirPath;
         this.dataFileName = dataFileName;
     }
-
     public PlayerData Load()
     {
         string fullPath = Path.Combine(dataDirPath, dataFileName);

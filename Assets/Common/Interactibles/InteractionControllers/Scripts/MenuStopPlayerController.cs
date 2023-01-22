@@ -13,7 +13,7 @@ public class MenuStopPlayerController : MonoBehaviour
         LockPlayer();
     }
 
-    private void LockPlayer() {
+    public void LockPlayer() {
         firstPersonController.GetComponent<CharacterMotor>().canControl = false;
         firstPersonController.GetComponent<CharacterMotor>().enabled = false;
         firstPersonController.GetComponent<MouseLook>().enabled = false;

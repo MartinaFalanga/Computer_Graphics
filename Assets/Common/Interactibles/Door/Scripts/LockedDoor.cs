@@ -1,51 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System;
 
 public class LockedDoor : MonoBehaviour
 {
 
     public GameObject[] unlockableObjects;
 
-    public GameObject padlockMenu;
-
-    public GameObject combinationPadlock;
-
-    public GameObject classicPadlock;
+    private GameObject padlock;
 
     public GameObject menusCanvas;
 
     public GameObject mainCamera;
 
-    private LockType lockType;
+    public LockType lockType;
 
     public CatchableObject[] requiredInventory;
 
     public int[] combination;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        lockType = padlockMenu.GetComponent<LockMenuController>().lockType;
-    }
-
     public void showPadlock() {
-        padlockMenu.SetActive(true);
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        LockMenuController[] lockMenuControllers = menusCanvas.GetComponentsInChildren<LockMenuController>();
+        LockMenuController currentLMC = null;
+        if (LockType.Classic.Equals(lockType)) {
+            currentLMC = FindLockMenuControllerByName("ClassicPadlockMenu");
+            currentLMC.gameObject.SetActive(true);
+            padlock = currentLMC.GetComponentInChildren<ClassicPadlockController>().gameObject;
+        }
+        else if(LockType.CombinationThree.Equals(lockType))
+        {
+            currentLMC = FindLockMenuControllerByName("NumPadlockMenu");
+            currentLMC.gameObject.SetActive(true);
+            padlock = currentLMC.GetComponentInChildren<CombinationThreePadlockController>().gameObject;
+        }
 
-        FindObjectOfType<Camera>().depth = 0;
+        mainCamera.GetComponent<Camera>().depth = 0;
 
         switch (lockType) {
             case LockType.CombinationThree:
-                combinationPadlock.GetComponent<CombinationThreePadlockController>().setActualGameObject(gameObject);
+                padlock.GetComponent<CombinationThreePadlockController>().setActualGameObject(gameObject);
                 break;
             case LockType.Classic:
-                classicPadlock.GetComponent<ClassicPadlockController>().setActualGameObject(gameObject);
-                if(classicPadlock.GetComponent<ClassicPadlockController>().isInventoryValid()) {
+                padlock.GetComponent<ClassicPadlockController>().setActualGameObject(gameObject);
+                if(padlock.GetComponent<ClassicPadlockController>().isInventoryValid()) {
                     unLock();
                 }
                 break;
-            
         }
     }
 
@@ -56,5 +58,18 @@ public class LockedDoor : MonoBehaviour
         }
         gameObject.GetComponent<OpenCloseController>().unLock();
         menusCanvas.GetComponent<MenusController>().DismissAll();
+    }
+
+
+    private LockMenuController FindLockMenuControllerByName(string padlockMenuName)
+    {
+        LockMenuController[] lmcs = menusCanvas.GetComponentsInChildren<LockMenuController>(true);
+        foreach (LockMenuController lmc in lmcs)
+        {
+            if (padlockMenuName.Equals(lmc.gameObject.name)){
+                return lmc;
+            }
+        }
+        return null;
     }
 }

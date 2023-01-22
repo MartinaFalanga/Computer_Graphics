@@ -34,11 +34,25 @@ public class SavingController : MonoBehaviour{
     public void Start()
     {
         this.dataHandler = new (Application.persistentDataPath, fileName);
+        playerData = dataHandler.Load();
     }
 
     public void NewGame()
     {
         playerData = new PlayerData();
+
+        //Destroy the whole inventory
+        InventoryController.instance.numOfItems = 0;
+        InventorySlot[] slots = InventoryController.instance.inventorySlots;
+        foreach(InventorySlot s in slots)
+        {
+            s.item = null;
+            CatchableObject co = s.GetComponentInChildren<CatchableObject>();
+            if (co != null)
+            {
+                Destroy(co.gameObject);
+            }
+        }
     }
 
     public void LoadGame()
@@ -48,12 +62,12 @@ public class SavingController : MonoBehaviour{
         {
             NewGame();
         }
-        //SceneLoader.instance.LoadSceneFromSavings(playerData);
 
         foreach (IDataPersistence idpo in dataPersistenceObjectList)
         {
             idpo.LoadData(playerData);
         }
+        InventoryController.instance.LoadData(playerData);
         Debug.Log("Caricamento completato!");
     }
 
@@ -69,6 +83,7 @@ public class SavingController : MonoBehaviour{
         {
             idpo.SaveData(ref playerData);
         }
+        InventoryController.instance.SaveData(ref playerData);
         dataHandler.Save(playerData);
         Debug.Log("Salvataggio completato!");
     }
