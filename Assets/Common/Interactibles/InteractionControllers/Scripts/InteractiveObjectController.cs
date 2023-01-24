@@ -59,6 +59,7 @@ public class InteractiveObjectController : MonoBehaviour
     }
 
     public void InteractionColliderEntered() {
+        Debug.Log("SONO ENTRATO NEL COLLIDER");
         this.isPlayerInInteractionCollider = true;
     }
 
@@ -73,7 +74,9 @@ public class InteractiveObjectController : MonoBehaviour
         GameObject player = GameObject.Find("First Person Controller").gameObject;
         this.isPlayerPointingWithMouse = true;
 
-        if(this.isPlayerInInteractionCollider && player.GetComponent<CharacterMotor>().canControl) {
+        if(this.isPlayerInInteractionCollider && player.GetComponent<CharacterMotor>().canControl)
+        {
+            Debug.Log("STO A FA RAYCAST");
             EnableInteractionMenu();
         }
 
