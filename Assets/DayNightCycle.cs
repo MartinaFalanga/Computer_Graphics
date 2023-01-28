@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
-    [SerializeField] public GameObject DirectionalLight;
+    private GameObject DirectionalLight;
     Light DirectonalLightLight;
     [SerializeField] ClockRotation clockRotation;
     public MeshRenderer text;
@@ -14,14 +14,20 @@ public class DayNightCycle : MonoBehaviour
 
     private void Start()
     {
-       // DirectionalLight = GetComponent<Light>();
-        DirectonalLightLight = DirectionalLight.GetComponent<Light>();
+        DirectionalLight = gameObject;
+        DirectonalLightLight = GetComponent<Light>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 rot = new Vector3(
+            (360 - (gameObject.transform.localRotation.eulerAngles.x - 180)) % 360,
+            (gameObject.transform.localRotation.eulerAngles.y - 180) % 360, 
+            (gameObject.transform.localRotation.eulerAngles.z - 180) % 360);
+
+
         float minHours = (1f / 24f) * 13f;
         float maxHours = (1f / 24f) * 18f;
         float minRotation = 159.7f;
@@ -42,24 +48,23 @@ public class DayNightCycle : MonoBehaviour
             float t = (clockRotation.dayNormalized - minHours) / (maxHours - minHours);
             transform.eulerAngles = new Vector3(Mathf.Lerp(minRotation, maxRotation, t),0,0);
             DirectonalLightLight.intensity = 1;
-            Debug.Log("Value x rotation:" + DirectionalLight.transform.eulerAngles.x); //Restituisce valori diversi da quelli attesi!
-            if (DirectionalLight.transform.rotation.x >= mezzogiorno1 && DirectionalLight.transform.rotation.x <= mezzogiorno2)
+            if (rot.x >= mezzogiorno1 && rot.x <= mezzogiorno2)
             {
                 text.material.color = new Color(255f, 0f, 0f, 255f);
             }
-            else if (DirectionalLight.transform.rotation.x >= una1 && DirectionalLight.transform.rotation.x <= una2)
+            else if (rot.x >= una1 && rot.x <= una2)
             {
                 text.material.color = new Color(255f, 0f, 0f, 200f);
             }
-            else if (DirectionalLight.transform.rotation.x >= due1 && DirectionalLight.transform.rotation.x <= due2)
+            else if (rot.x >= due1 && rot.x <= due2)
             {
                 text.material.color = new Color(255f, 0f, 0f, 150f);
             }
-            else if (DirectionalLight.transform.rotation.x >= tre1 && DirectionalLight.transform.rotation.x <= tre2)
+            else if (rot.x >= tre1 && rot.x <= tre2)
             {
                 text.material.color = new Color(255f, 0f, 0f, 100f);
             }
-            else if (DirectionalLight.transform.rotation.x >= quattro1 && DirectionalLight.transform.rotation.x <= quattro2)
+            else if (rot.x >= quattro1 && rot.x <= quattro2)
             {
                 text.material.color = new Color(255f, 0f, 0f, 70f);
             }
@@ -67,7 +72,7 @@ public class DayNightCycle : MonoBehaviour
         else
         {
             DirectonalLightLight.intensity = 0;
-            text.material.color = new Color(255f, 0f, 0f, 0f);
+            text.material.color = new Color(253f, 253f, 253f, 255f);
         }
 
     }
