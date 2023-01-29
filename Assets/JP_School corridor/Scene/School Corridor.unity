@@ -21308,18 +21308,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d38f9192ddeca9a4a88268d71a71ac59, type: 3}
   m_PrefabInstance: {fileID: 105074630}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &685310289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 685310285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b539f11d836ec46a59811e2efaa285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &685310293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21353,6 +21341,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.7829437, y: 1.6272503, z: 1.2898687}
   m_Center: {x: 0.5279716, y: -0.5462935, z: -0.6124434}
+--- !u!114 &685310299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685310285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51626a29e382484f96bc377b14d4b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {x: 0, y: 0, z: 0}
+  angle: {x: 0, y: 0, z: 0}
+  scale: {x: 100, y: 100, z: 100}
+  menuLightIntensity: 5
+  zoomableObjectMenu: {fileID: 778460868}
 --- !u!1001 &687651077
 PrefabInstance:
   m_ObjectHideFlags: 0
