@@ -64,9 +64,7 @@ public class InteractiveObjectController : MonoBehaviour
         }
     }
 
-    public void InteractionColliderEntered()
-    {
-        Debug.Log("SONO ENTRATO NEL COLLIDER");
+    public void InteractionColliderEntered() {
         this.isPlayerInInteractionCollider = true;
     }
 
