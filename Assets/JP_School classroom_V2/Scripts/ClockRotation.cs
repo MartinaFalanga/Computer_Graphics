@@ -7,23 +7,34 @@ public class ClockRotation : MonoBehaviour
     private const float REAL_SECONDS_PER_INGAME_DAY = 60f;
     private Transform clockHourHandTransform;
     private Transform clockMinuteHandTransform;
-    private float day;
+    public float day;
     [HideInInspector] public float dayNormalized;
     private bool isTimeChanging = false;
     [SerializeField] float timeChangeSeconds;
     private float currentTimeChangeSeconds = 0;
     private float timeAtStartAnim;
 
+    private int STARTING_HOUR = 10;
+
+    public int hours;
+    public int minutes;
+
+    void Start()
+    {
+        currentTimeChangeSeconds += Time.deltaTime;
+        currentTimeChangeSeconds = Mathf.Clamp(currentTimeChangeSeconds, 0f, timeChangeSeconds);
+        day = 0.04157f * (hours - STARTING_HOUR);
+    }
+
+
     private void Awake()
     {
         clockHourHandTransform = transform.Find("Short_pivot");
         clockMinuteHandTransform = transform.Find("Long_pivot");
-
     }
 
     private void Update()
     {
-        //    day += Time.deltaTime / REAL_SECONDS_PER_INGAME_DAY;
         PlayerInputClock();
         dayNormalized = day % 1f;
         float rotationDegreesPerDay = 720f;
@@ -36,6 +47,7 @@ public class ClockRotation : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G) && !isTimeChanging && GetComponent<InteractiveObjectController>().isPlayerInInteractionCollider) 
         {
+            hours = (hours + 1) % 24;
             timeAtStartAnim = day;
             currentTimeChangeSeconds = 0;
             isTimeChanging = true;

@@ -84,7 +84,6 @@ public class InteractiveObjectController : MonoBehaviour
 
         if (this.isPlayerInInteractionCollider && player.GetComponent<CharacterMotor>().canControl)
         {
-            Debug.Log("STO A FA RAYCAST");
             EnableInteractionMenu();
         }
 
