@@ -14,33 +14,40 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
     private Animator anim;
     private Animator otherAnim;
 
-    void Start() {
+    void Start()
+    {
         anim = this.GetComponentInParent<Animator>();
         otherAnim = otherDoorController != null ? otherDoorController.GetComponentInParent<Animator>() : null;
     }
 
-    public void ExecuteLogic() {
+    public void ExecuteLogic()
+    {
 
-        if(isLocked) {
+        if (isLocked)
+        {
             FindObjectOfType<AudioManager>().Play("lockDoor");
             showPadlock();
-        } else {
+        }
+        else
+        {
             openClose();
         }
 
         new WaitForSeconds(1 / speed);
     }
 
-    public void unLock() {
+    public void unLock()
+    {
         this.isLocked = false;
         openClose();
     }
 
     /** private methods */
 
-    private void openClose() {
+    private void openClose()
+    {
         isOpen = !isOpen;
-        
+
         string clipName;
         anim.SetFloat("Speed", speed);
         anim.SetTrigger("OpenClose");
@@ -53,7 +60,7 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
         }
         switch (doorType)
         {
-            case DoorType.Door: 
+            case DoorType.Door:
                 int randomClipNumber = Random.Range(1, 3);
                 clipName = isOpen ? "openDoor" + randomClipNumber : "autoCloseDoor";
                 FindObjectOfType<AudioManager>().PlayDelayed(clipName, isOpen ? 0 : .9f / speed);
@@ -68,24 +75,29 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
             default: break;
         }
 
-        if(isOpen) {
+        if (isOpen)
+        {
             changeInteractionMenuText("Premi F per chiudere");
-        } else {
+        }
+        else
+        {
             changeInteractionMenuText("Premi F per aprire");
         }
     }
 
-    private void showPadlock() {
+    private void showPadlock()
+    {
         gameObject.GetComponent<LockedDoor>().showPadlock();
     }
 
-    private void changeInteractionMenuText(string text) {
+    private void changeInteractionMenuText(string text)
+    {
         InteractiveObjectController ioc = gameObject.GetComponent<InteractiveObjectController>();
-        if(ioc == null)
+        if (ioc == null)
         {
             ioc = gameObject.GetComponentInParent<InteractiveObjectController>();
         }
-        if(ioc != null)
+        if (ioc != null)
         {
             ioc.interactionMenuText = text;
         }

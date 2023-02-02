@@ -26,21 +26,26 @@ public class InteractiveObjectController : MonoBehaviour
     private GameObject mainCamera;
 
 
-    void Start() {
+    void Start()
+    {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
         interactionCollider.GetComponent<InteractionColliderController>().SetInteractiveObjectController(this);
-        
-        if(emissionMaterial != null)
+
+        if (emissionMaterial != null)
             originalEmissionColor = emissionMaterial.GetColor("_EmissionColor");
     }
 
-    void Update() {
-        if(isPlayerInInteractionCollider && isPlayerPointingWithMouse) {
-            if(Input.GetKeyDown(KeyCode.F)) {
+    void Update()
+    {
+        if (isPlayerInInteractionCollider && isPlayerPointingWithMouse)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
 
-                if(gameObject.GetComponent<IInteractiveObject>() != null) {
-                    gameObject.GetComponent<IInteractiveObject>().ExecuteLogic();                
+                if (gameObject.GetComponent<IInteractiveObject>() != null)
+                {
+                    gameObject.GetComponent<IInteractiveObject>().ExecuteLogic();
                 }
                 else if (gameObject.GetComponentInChildren<IInteractiveObject>() != null)
                 {
@@ -49,7 +54,8 @@ public class InteractiveObjectController : MonoBehaviour
 
                 DismissInteractionMenu();
 
-                if (interactionOnce) {
+                if (interactionOnce)
+                {
                     interactionCollider.SetActive(false);
                     isPlayerInInteractionCollider = false;
                 }
@@ -58,32 +64,34 @@ public class InteractiveObjectController : MonoBehaviour
         }
     }
 
-    public void InteractionColliderEntered() {
+    public void InteractionColliderEntered()
+    {
         Debug.Log("SONO ENTRATO NEL COLLIDER");
         this.isPlayerInInteractionCollider = true;
     }
 
-    public void InteractionColliderExited() {
+    public void InteractionColliderExited()
+    {
         this.isPlayerInInteractionCollider = false;
 
         this.DismissInteractionMenu();
     }
-    
+
     void OnMouseEnter()
     {
         GameObject player = GameObject.Find("First Person Controller").gameObject;
         this.isPlayerPointingWithMouse = true;
 
-        if(this.isPlayerInInteractionCollider && player.GetComponent<CharacterMotor>().canControl)
+        if (this.isPlayerInInteractionCollider && player.GetComponent<CharacterMotor>().canControl)
         {
-            Debug.Log("STO A FA RAYCAST");
             EnableInteractionMenu();
         }
 
-        if(emissionMaterial != null) {
+        if (emissionMaterial != null)
+        {
             emissionMaterial.DisableKeyword("_EMISSION");
             emissionMaterial.EnableKeyword("_EMISSION");
-            emissionMaterial.SetColor("_EmissionColor",interactionEmissionColor);
+            emissionMaterial.SetColor("_EmissionColor", interactionEmissionColor);
         }
     }
 
@@ -91,21 +99,24 @@ public class InteractiveObjectController : MonoBehaviour
     {
         this.isPlayerPointingWithMouse = false;
 
-        if(this.isPlayerInInteractionCollider) {
+        if (this.isPlayerInInteractionCollider)
+        {
             this.DismissInteractionMenu();
         }
 
-        if(emissionMaterial != null) {
-            emissionMaterial.SetColor("_EmissionColor",originalEmissionColor);
+        if (emissionMaterial != null)
+        {
+            emissionMaterial.SetColor("_EmissionColor", originalEmissionColor);
             emissionMaterial.DisableKeyword("_EMISSION");
             emissionMaterial.EnableKeyword("_EMISSION");
-            emissionMaterial.SetColor("_EmissionColor",originalEmissionColor);
+            emissionMaterial.SetColor("_EmissionColor", originalEmissionColor);
         }
     }
 
     // private methods
 
-    private void DismissInteractionMenu() {
+    private void DismissInteractionMenu()
+    {
         interactionMenuPanel.SetActive(false);
     }
 

@@ -12,10 +12,11 @@ public class ObjectZoomInteractionMenuController : MonoBehaviour, ISingleMenuCon
 
     void Update()
     {
-        
+
     }
-    
-    public void showObject(GameObject go) {
+
+    public void showObject(GameObject go)
+    {
         Debug.Log("Showing object in menu");
         GameObject goClone = Instantiate(go);
         goClone.transform.SetParent(gameObject.transform.GetChild(0));
@@ -42,9 +43,11 @@ public class ObjectZoomInteractionMenuController : MonoBehaviour, ISingleMenuCon
     }
 
     // private methods
-    
-    private void DestroyChildren() {
-        for (var i = menuObjectContainer.transform.childCount - 1; i >= 0; i--) {
+
+    private void DestroyChildren()
+    {
+        for (var i = menuObjectContainer.transform.childCount - 1; i >= 0; i--)
+        {
             Destroy(menuObjectContainer.transform.GetChild(i).gameObject);
         }
     }
@@ -59,7 +62,7 @@ public class ObjectZoomInteractionMenuController : MonoBehaviour, ISingleMenuCon
             Transform _HasChildren = child.GetComponentInChildren<Transform>();
             if (_HasChildren != null)
                 SetGameLayerRecursive(child.gameObject, _layer);
-            
+
         }
     }
 

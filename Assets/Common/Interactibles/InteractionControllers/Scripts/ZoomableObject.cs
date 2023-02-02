@@ -16,10 +16,18 @@ public class ZoomableObject : MonoBehaviour, IInteractiveObject
 
     public void ExecuteLogic() {
         Debug.Log("ZoomableObject - ExecuteLogic");
+
+        deletePreExistingObject();
         
         zoomableObjectMenu.SetActive(true);
         zoomableObjectMenu.GetComponent<ObjectZoomInteractionMenuController>().showObject(gameObject);
             
     }
-    
+
+    private void deletePreExistingObject()
+    {
+        if(zoomableObjectMenu.transform.Find("Object").transform.childCount > 0)
+            Destroy(zoomableObjectMenu.transform.Find("Object").transform.GetChild(0).gameObject);
+    }
+
 }
