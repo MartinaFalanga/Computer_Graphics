@@ -19,7 +19,7 @@ public class Footsteps : MonoBehaviour
     {
         footstepSource = GetComponent<AudioSource>();
         cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
-        phone = GameObject.FindGameObjectWithTag("MainCamera");
+        phone = GameObject.FindGameObjectWithTag("Smartphone");
     }
 
     // Update is called once per frame
@@ -57,7 +57,7 @@ public class Footsteps : MonoBehaviour
         {
             cameraFootstepAnimator.Play("New State");
         }
-        Animator phoneFootstepAnimator = cameraObject.GetComponent<Animator>();
+        Animator phoneFootstepAnimator = phone.GetComponent<Animator>();
         if (phoneFootstepAnimator != null)
         {
             phoneFootstepAnimator.Play("New State");
