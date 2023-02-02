@@ -47,7 +47,6 @@ public class OpenCloseController : MonoBehaviour, IInteractiveObject
     private void openClose()
     {
         isOpen = !isOpen;
-
         string clipName;
         anim.SetFloat("Speed", speed);
         anim.SetTrigger("OpenClose");
