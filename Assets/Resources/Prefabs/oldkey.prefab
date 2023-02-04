@@ -118,6 +118,16 @@ MonoBehaviour:
   scaleInInventory: {x: 1, y: 1, z: 1}
   isInInventory: 0
   isLocked: 1
+  prefabName: 
+  data:
+    prefabName: 
+    type: 0
+    id: 
+    angleInInventory: {x: 0, y: 0, z: 0}
+    scaleInInventory: {x: 0, y: 0, z: 0}
+    isInInventory: 0
+    isLocked: 0
+  type: 0
 --- !u!114 &4485051942828656811
 MonoBehaviour:
   m_ObjectHideFlags: 0

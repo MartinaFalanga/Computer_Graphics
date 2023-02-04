@@ -10,8 +10,6 @@ public class ClassicPadlockController : MonoBehaviour
 
     public GameObject padlockMenuBar;
 
-    public GameObject playerInventory;
-
     public GameObject firstPersonController;
 
     // Start is called before the first frame update
@@ -51,7 +49,7 @@ public class ClassicPadlockController : MonoBehaviour
     }
 
     public bool isInventoryValid() {
-        CatchableObject[] playerInventoryObjects = playerInventory.GetComponent<InventoryController>().GetCatchableObjects();
+        CatchableObject[] playerInventoryObjects = InventoryController.instance.GetCatchableObjects();
 
         CatchableObject[] requiredInventoryObjects = new CatchableObject[2];
 
@@ -60,12 +58,17 @@ public class ClassicPadlockController : MonoBehaviour
             requiredInventoryObjects[i] = go;
             i++;
         }
-        
-        foreach(CatchableObject requiredObject in requiredInventoryObjects) {
+
+        Debug.Log("OOO - requiredInventoryObjects length= " + requiredInventoryObjects.Length);
+
+        foreach (CatchableObject requiredObject in requiredInventoryObjects) {
             bool isInInventory = false;
-            foreach(CatchableObject playerInventoryObject in playerInventoryObjects) {
-                if(playerInventoryObject != null) {
-                    if(playerInventoryObject.name == requiredObject.name)
+            Debug.Log("AAA - requiredObject.name = " + requiredObject.name);
+            foreach (CatchableObject playerInventoryObject in playerInventoryObjects) {
+                if (playerInventoryObject != null)
+                {
+                    Debug.Log("CCC - playerInventoryObject.name = " + playerInventoryObject.name + " requiredObject.name = " + requiredObject.name);
+                    if (playerInventoryObject.name + "(Clone)" == requiredObject.name) // il confronto si basa sul nome
                         isInInventory = true;
                 }
             }
@@ -75,7 +78,7 @@ public class ClassicPadlockController : MonoBehaviour
         }
 
         foreach(CatchableObject requiredObject in requiredInventoryObjects) {
-            playerInventory.GetComponent<InventoryController>().deleteObject(requiredObject);
+            InventoryController.instance.deleteObject(requiredObject);
         }
 
         return true;

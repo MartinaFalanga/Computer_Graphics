@@ -77,5 +77,6 @@ public class SceneLoader : MonoBehaviour
         SettingsManager.instance.UpdateSettings();
         SavingController.instance.UpdateAllDataPersistenceObjects();
         InventoryController.instance.insertItemsInInventoryBar();
+        InventoryController.instance.transform.position = new Vector3(100,100,100);
     }
 }

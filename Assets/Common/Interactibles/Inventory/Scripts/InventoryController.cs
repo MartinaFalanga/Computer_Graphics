@@ -28,6 +28,7 @@ public class InventoryController : MonoBehaviour
     public void AddGameObject(CatchableObject go) {
         if(numOfItems < MAX_OBJECTS) {
             GameObject goCopy = Instantiate(Resources.Load<GameObject>("Prefabs/" + go.name));
+            goCopy.transform.position = inventorySlots[numOfItems].transform.position;
             goCopy.name = go.name;
             Utility.CopyComponent<CatchableObject>(go, goCopy);
             goCopy.gameObject.transform.SetParent(inventorySlots[numOfItems].transform);
