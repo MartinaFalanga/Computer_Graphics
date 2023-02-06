@@ -13,24 +13,49 @@ public class CorridorDoor : MonoBehaviour, IInteractiveObject
 
     private bool doorsOpened = false;
 
+    public bool isLocked;
+
     public void ExecuteLogic() {
         if(doorsOpened) // then close the doors
         {
-            GetComponent<InteractiveObjectController>().interactionMenuText = "Premi F per aprire la porta";
+            // GetComponent<InteractiveObjectController>().interactionMenuText = "Premi F per aprire la porta";
             animatorLeft.Play("CloseDoorLeft", 0,0.0f);
             animatorRight.Play("CloseDoorRight", 0, 0.0f);
         } else // open the doors
         {
-            GetComponent<InteractiveObjectController>().interactionMenuText = "Premi F per chiudere la porta";
+            // GetComponent<InteractiveObjectController>().interactionMenuText = "Premi F per chiudere la porta";
             animatorLeft.Play("OpenDoorLeft", 0, 0.0f);
             animatorRight.Play("OpenDoorRight", 0, 0.0f);
-            SceneDoorController sceneDoorController = GetComponent<SceneDoorController>();
-            if (sceneDoorController != null)
+
+            CatchableObject[] requiredInventory = GetComponent<LockedDoor>().requiredInventory;
+            InventoryController inventoryController = InventoryController.instance;
+            bool flag = true;
+            foreach(CatchableObject catchableObject in requiredInventory)
             {
-                sceneDoorController.ChangeScene();
+                if(!inventoryController.IsAlreadyInInventory(catchableObject))
+                {
+                    flag = false; break;
+                }
+            }
+            isLocked=!flag;
+
+            if (isLocked)
+                gameObject.GetComponent<LockedDoor>().showPadlock();
+            else
+            {
+                foreach (CatchableObject catchableObject in requiredInventory)
+                {
+                    inventoryController.deleteObject(catchableObject);
+                }
+
+                SceneDoorController sceneDoorController = GetComponent<SceneDoorController>();
+                if (sceneDoorController != null)
+                {
+                    sceneDoorController.ChangeScene();
+                }
             }
         }
-        doorsOpened = !doorsOpened;
+        // doorsOpened = !doorsOpened;
     }
 
 }
