@@ -95,7 +95,8 @@ public class InventoryController : MonoBehaviour
             }
 
             if(deleted && i<inventorySlots.Length-1) {
-                inventorySlots[i].item = inventorySlots[i+1].item;
+                if(inventorySlots[i + 1].item != null)
+                    inventorySlots[i].item = inventorySlots[i+1].item;
             }
             i++;
         }
@@ -124,7 +125,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private bool IsAlreadyInInventory(CatchableObject coToCheck)
+    public bool IsAlreadyInInventory(CatchableObject coToCheck)
     {
         bool isAlreadyInInventory = false;
         CatchableObject[] cos = GetCatchableObjects();
