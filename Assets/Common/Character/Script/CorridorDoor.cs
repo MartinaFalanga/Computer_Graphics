@@ -19,13 +19,13 @@ public class CorridorDoor : MonoBehaviour, IInteractiveObject
         if(doorsOpened) // then close the doors
         {
             // GetComponent<InteractiveObjectController>().interactionMenuText = "Premi F per aprire la porta";
-            animatorLeft.Play("CloseDoorLeft", 0,0.0f);
-            animatorRight.Play("CloseDoorRight", 0, 0.0f);
+            //animatorLeft.Play("CloseDoorLeft", 0,0.0f);
+            //animatorRight.Play("CloseDoorRight", 0, 0.0f);
         } else // open the doors
         {
             // GetComponent<InteractiveObjectController>().interactionMenuText = "Premi F per chiudere la porta";
-            animatorLeft.Play("OpenDoorLeft", 0, 0.0f);
-            animatorRight.Play("OpenDoorRight", 0, 0.0f);
+            //animatorLeft.Play("OpenDoorLeft", 0, 0.0f);
+            //animatorRight.Play("OpenDoorRight", 0, 0.0f);
 
             CatchableObject[] requiredInventory = GetComponent<LockedDoor>().requiredInventory;
             InventoryController inventoryController = InventoryController.instance;
