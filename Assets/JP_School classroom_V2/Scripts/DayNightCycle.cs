@@ -49,30 +49,30 @@ public class DayNightCycle : MonoBehaviour
             transform.eulerAngles = new Vector3(Mathf.Lerp(minRotation, maxRotation, t),0,0);
             DirectonalLightLight.intensity = 1;
             if (rot.x >= mezzogiorno1 && rot.x <= mezzogiorno2)
-            {
-                text.material.color = new Color(255f, 0f, 0f, 255f);
+            { 
+                text.material.color = new Color(255f/255f, 0f, 0f, 255f/255f);
             }
             else if (rot.x >= una1 && rot.x <= una2)
             {
-                text.material.color = new Color(255f, 0f, 0f, 200f);
+                text.material.color = new Color(255f/255f, 0f, 0f, 200f/255f);
             }
             else if (rot.x >= due1 && rot.x <= due2)
             {
-                text.material.color = new Color(255f, 0f, 0f, 150f);
+                text.material.color = new Color(255f/255f, 0f, 0f, 150f/255f);
             }
             else if (rot.x >= tre1 && rot.x <= tre2)
             {
-                text.material.color = new Color(255f, 0f, 0f, 100f);
+                text.material.color = new Color(255f/255f, 0f, 0f, 100f/255f);
             }
             else if (rot.x >= quattro1 && rot.x <= quattro2)
             {
-                text.material.color = new Color(255f, 0f, 0f, 70f);
+                text.material.color = new Color(255f/255f, 0f, 0f, 70f/255f);
             }
         }
         else
         {
             DirectonalLightLight.intensity = 0;
-            text.material.color = new Color(253f, 253f, 253f, 255f);
+            text.material.color = new Color(255f / 255f, 0f, 0f, 0f);
         }
 
     }
