@@ -10,6 +10,7 @@ public class ZoomableObject : MonoBehaviour, IInteractiveObject
     public Vector3 scale;
 
     public float menuLightIntensity;
+    public float menuLightRange;
 
     /** passare il game object ObjectZoomInteractionMenu che trovi nel menu a sinistra */
     public GameObject zoomableObjectMenu;

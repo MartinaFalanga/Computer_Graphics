@@ -34,4 +34,9 @@ public class InventoryContainerBarController : MonoBehaviour
         go.transform.localScale += new Vector3(600, 600, 600);
     }
 
+    public void DeleteObject(int index)
+    {
+        Destroy(this.gameObjects[index].GetComponent<Transform>().GetChild(0).gameObject);
+    }
+
 }

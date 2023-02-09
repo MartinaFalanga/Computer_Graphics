@@ -33,6 +33,7 @@ public class ObjectZoomInteractionMenuController : MonoBehaviour, ISingleMenuCon
         SetGameLayerRecursive(goClone, layer);
 
         menuLight.GetComponent<Light>().intensity = go.GetComponent<ZoomableObject>().menuLightIntensity;
+        menuLight.GetComponent<Light>().range = go.GetComponent<ZoomableObject>().menuLightRange;
     }
 
 
