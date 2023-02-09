@@ -3735,6 +3735,7 @@ GameObject:
   - component: {fileID: 129957488}
   - component: {fileID: 129957489}
   - component: {fileID: 129957490}
+  - component: {fileID: 129957491}
   m_Layer: 0
   m_Name: door01_A
   m_TagString: Untagged
@@ -3787,7 +3788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905014cc2c9989b4dbfc23ed78ebe9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 3
+  sceneIndex: 1
 --- !u!114 &129957490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3804,6 +3805,25 @@ MonoBehaviour:
   animatorLeft: {fileID: 129957485}
   doorRight: {fileID: 129957480}
   animatorRight: {fileID: 129957481}
+  isLocked: 0
+--- !u!114 &129957491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129957486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04215ab1256017438c1392fa40219de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlockableObjects: []
+  menusCanvas: {fileID: 1209960731}
+  mainCamera: {fileID: 298684223}
+  lockType: 0
+  requiredInventory: []
+  combination: 
 --- !u!1 &129957496
 GameObject:
   m_ObjectHideFlags: 0
@@ -8912,6 +8932,7 @@ MonoBehaviour:
   angle: {x: -7.62, y: 180, z: 0}
   scale: {x: 1000, y: 1000, z: 1000}
   menuLightIntensity: 5
+  menuLightRange: 0
   zoomableObjectMenu: {fileID: 1103355871}
 --- !u!1 &411451926
 GameObject:
@@ -16502,7 +16523,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   padlockMenuBar: {fileID: 269970395}
-  playerInventory: {fileID: 0}
   firstPersonController: {fileID: 0}
 --- !u!1 &892749558
 GameObject:
@@ -20447,7 +20467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1141209001
 Transform:
   m_ObjectHideFlags: 0
