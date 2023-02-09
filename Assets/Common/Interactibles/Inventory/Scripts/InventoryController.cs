@@ -65,7 +65,13 @@ public class InventoryController : MonoBehaviour
     private void insertInInventoryBar(string objectName, int currIndex) {
         Debug.Log("ObjectName: " + objectName);
         GameObject prefab = Instantiate(Resources.Load<GameObject>("Prefabs/" + objectName));
+        prefab.name = objectName;
         InventoryContainerBarController.instance.AddObject(prefab, currIndex);
+    }
+
+    private void deleteFromInventoryBar(int currIndex)
+    {
+        InventoryContainerBarController.instance.DeleteObject(currIndex);
     }
 
     public void insertItemsInInventoryBar()
@@ -86,17 +92,22 @@ public class InventoryController : MonoBehaviour
     }
 
     public void deleteObject(CatchableObject toDelete) {
+        Debug.Log("Deleting object: " + toDelete.name);
+
         int i = 0;
         bool deleted = false;
+        int deletedObjects = 0;
         foreach(InventorySlot slot in inventorySlots) {
-            if(slot != null && slot.item != null && slot.item.name == toDelete.name) {
-                inventorySlots[i] = null;
-                deleted = true;
-            }
-
-            if(deleted && i<inventorySlots.Length-1) {
-                if(inventorySlots[i + 1].item != null)
-                    inventorySlots[i].item = inventorySlots[i+1].item;
+            if(slot != null && slot.item != null && slot.item.name == toDelete.name.Replace("(Clone)","")) {
+                Destroy(slot.GetComponent<Transform>().GetChild(0).gameObject);
+                inventorySlots[i].item = null;
+                deleteFromInventoryBar(i-deletedObjects);
+                for (int j = i; j < numOfItems - 1; j++)
+                {
+                    inventorySlots[j].item = inventorySlots[j+1].item;
+                }
+                numOfItems--;
+                deletedObjects++;
             }
             i++;
         }
