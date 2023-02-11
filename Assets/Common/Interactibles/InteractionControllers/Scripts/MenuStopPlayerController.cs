@@ -6,18 +6,20 @@ public class MenuStopPlayerController : MonoBehaviour
 {
 
     public GameObject firstPersonController;
-    public GameObject mainCamera;
+    public bool shouldStartLocked = true;
     
     void OnEnable()
     {
-        LockPlayer();
+        if (shouldStartLocked)
+        {
+            LockPlayer();
+        }
     }
 
     public void LockPlayer() {
         firstPersonController.GetComponent<CharacterMotor>().canControl = false;
         firstPersonController.GetComponent<CharacterMotor>().enabled = false;
         firstPersonController.GetComponent<MouseLook>().enabled = false;
-        CursorManager.instance.UpdateCursor(false);
-        mainCamera.GetComponent<MouseLook>().enabled = false;
+        CursorManager.instance.UpdateCursor(true);
     }
 }

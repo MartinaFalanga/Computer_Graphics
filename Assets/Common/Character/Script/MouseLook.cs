@@ -17,7 +17,7 @@ using System.Collections;
 [AddComponentMenu("Camera-Control/Mouse Look")]
 public class MouseLook : MonoBehaviour {
 
-	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
+	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2, NoMove = 0 }
 	public RotationAxes axes = RotationAxes.MouseXAndY;
 	public float sensitivityX = 15F;
 	public float sensitivityY = 15F;
@@ -46,12 +46,15 @@ public class MouseLook : MonoBehaviour {
 			{
 				transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 			}
-			else
+			else if (axes == RotationAxes.MouseY)
 			{
 				rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 				rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 				
 				transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
+			} else
+			{
+				
 			}
 		
 	}

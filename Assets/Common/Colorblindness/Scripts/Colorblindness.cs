@@ -48,7 +48,7 @@ namespace SOHNE.Accessibility.Colorblindness
     void SearchVolumes() => volumes = GameObject.FindObjectsOfType<Volume>();
 
         #region Enable/Disable
-        private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+        //private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
         #endregion
 
         public static Colorblindness Instance { get; private set; }
@@ -63,20 +63,20 @@ namespace SOHNE.Accessibility.Colorblindness
             else if (Instance != this)
             {
                 maxType = (int)System.Enum.GetValues(typeof(ColorblindTypes)).Cast<ColorblindTypes>().Last();
-                Destroy(gameObject);
+                //Destroy(gameObject);
                 return;
             }
             DontDestroyOnLoad(gameObject);
         }
 
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        /*void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             SearchVolumes();
 
             if (volumes == null || volumes.Length <= 0) return;
 
             Change(-1);
-        }
+        }*/
 
         void Start()
         {
@@ -98,7 +98,10 @@ namespace SOHNE.Accessibility.Colorblindness
 
         public void InitChange()
         {
-            if (volumes == null) return;
+
+            SearchVolumes();
+
+            if (volumes == null || volumes.Length <= 0) return;
 
             StartCoroutine(ApplyFilter());
 

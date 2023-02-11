@@ -22,7 +22,11 @@ public class ZoomableObject : MonoBehaviour, IInteractiveObject
         
         zoomableObjectMenu.SetActive(true);
         zoomableObjectMenu.GetComponent<ObjectZoomInteractionMenuController>().showObject(gameObject);
-            
+        InteractibleObject interactibleObject = GetComponent<InteractibleObject>();
+        if (interactibleObject != null)
+        {
+            interactibleObject.OnInteraction();
+        }
     }
 
     private void deletePreExistingObject()
