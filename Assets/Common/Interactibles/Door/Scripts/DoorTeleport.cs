@@ -25,7 +25,10 @@ public class DoorTeleport : MonoBehaviour
                 copyAnimator.SetFloat("Speed", speed);
                 copyAnimator.SetTrigger("OpenClose");
             }
-            hardCloseDoorAudioSource.PlayDelayed(.9f / speed);
+            if (hardCloseDoorAudioSource != null)
+            {
+                hardCloseDoorAudioSource.PlayDelayed(.9f / speed);
+            }
             if(shadow != null)
             {
                 StartCoroutine(StartShadowSteps());

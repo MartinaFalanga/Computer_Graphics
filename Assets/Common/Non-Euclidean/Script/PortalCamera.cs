@@ -6,6 +6,7 @@ public class PortalCamera : MonoBehaviour
 {
     public Transform playerCamera;
     public bool isMirror = false;
+    public bool isInverted = false;
     public Transform portal;
     public Transform otherPortal;
 
@@ -15,6 +16,10 @@ public class PortalCamera : MonoBehaviour
         if (!isMirror)
         {
             Vector3 playerOffsetFromPortal = playerCamera.position - otherPortal.position;
+            if (isInverted)
+            {
+                playerOffsetFromPortal = new Vector3((-1)*playerOffsetFromPortal.x, playerOffsetFromPortal.y, (-1)*playerOffsetFromPortal.z);
+            }
             transform.position = portal.position + playerOffsetFromPortal;
         }
         float angularDifferenceBetweenPortalRotations = Quaternion.Angle(portal.rotation, otherPortal.rotation);
