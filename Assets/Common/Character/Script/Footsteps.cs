@@ -12,14 +12,14 @@ public class Footsteps : MonoBehaviour
                                     10.380f, 11.017f, 11.577f, 12.148f};
     private int currentStep = 0;
     private AudioSource footstepSource;
-    private GameObject cameraObject;
-    private GameObject phone;
+    private GameObject[] cameraObjects;
+    private GameObject[] phones;
 
     public void Awake()
     {
         footstepSource = GetComponent<AudioSource>();
-        cameraObject = GameObject.FindGameObjectWithTag("MainCamera");
-        phone = GameObject.FindGameObjectWithTag("Smartphone");
+        cameraObjects = GameObject.FindGameObjectsWithTag("MainCamera");
+        phones = GameObject.FindGameObjectsWithTag("Smartphone");
     }
 
     // Update is called once per frame
@@ -47,20 +47,32 @@ public class Footsteps : MonoBehaviour
     // private methods
 
     private void StartBobbing() {
-        cameraObject.GetComponent<Animator>().Play("HeadBobbing");
-        phone.GetComponent<Animator>().Play("PhoneShaking");
+        foreach (GameObject cameraObject in cameraObjects)
+        {
+            cameraObject.GetComponent<Animator>().Play("HeadBobbing");
+        }
+        foreach (GameObject phone in phones)
+        {
+            phone.GetComponent<Animator>().Play("PhoneShaking");
+        }
     }
 
     private void StopBobbing() {
-        Animator cameraFootstepAnimator = cameraObject.GetComponent<Animator>();
-        if(cameraFootstepAnimator != null)
+        foreach (GameObject cameraObject in cameraObjects)
         {
-            cameraFootstepAnimator.Play("New State");
+            Animator cameraFootstepAnimator = cameraObject.GetComponent<Animator>();
+            if (cameraFootstepAnimator != null)
+            {
+                cameraFootstepAnimator.Play("New State");
+            }
         }
-        Animator phoneFootstepAnimator = phone.GetComponent<Animator>();
-        if (phoneFootstepAnimator != null)
+        foreach (GameObject phone in phones)
         {
-            phoneFootstepAnimator.Play("New State");
+            Animator phoneFootstepAnimator = phone.GetComponent<Animator>();
+            if (phoneFootstepAnimator != null)
+            {
+                phoneFootstepAnimator.Play("New State");
+            }
         }
     }
 

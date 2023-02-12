@@ -8,6 +8,8 @@ public class CursorManager : MonoBehaviour
     public bool isLockedToTheCenter;
     public static CursorManager instance;
     public AudioSource clickSound;
+    public Camera mainCamera;
+    public MouseLook playerLook;
 
     void Awake()
     {
@@ -32,30 +34,23 @@ public class CursorManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
         {
-            ChangeCursor();
+            UpdateCursor(isLockedToTheCenter);
         }
     }
 
-    public void UpdateCursor(bool isCursorToLock)
+    public void UpdateCursor(bool isLocked)
     {
-        if (isCursorToLock) {
-            Cursor.lockState = CursorLockMode.Locked;
-        } else {
-            Cursor.lockState = CursorLockMode.None;
-        }
-        isLockedToTheCenter = isCursorToLock;
-    }
-
-    public void ChangeCursor()
-    {
-        if (!isLockedToTheCenter)
-        {
+        Debug.Log("IsLocked: " + isLocked);
+        if (!isLocked) {
+            mainCamera.GetComponent<MouseLook>().enabled = true;
+            playerLook.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
         }
-        else
-        {
+        else {
+            mainCamera.GetComponent<MouseLook>().enabled = false;
+            playerLook.enabled = false;
             Cursor.lockState = CursorLockMode.None;
         }
-        isLockedToTheCenter = !isLockedToTheCenter;
+        isLockedToTheCenter = !isLocked;
     }
 }

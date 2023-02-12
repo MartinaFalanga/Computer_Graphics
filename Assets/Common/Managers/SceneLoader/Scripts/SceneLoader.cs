@@ -1,4 +1,7 @@
 using System.Collections;
+
+using SOHNE.Accessibility.Colorblindness;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -73,6 +76,7 @@ public class SceneLoader : MonoBehaviour
 
     private void SetUpdatesInScene()
     {
+        Colorblindness.Instance.InitChange();
         AudioManager.instance.UpdateValues();
         SettingsManager.instance.UpdateSettings();
         SavingController.instance.UpdateAllDataPersistenceObjects();

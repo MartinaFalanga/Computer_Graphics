@@ -8,7 +8,11 @@ public class DoorTeleport : MonoBehaviour
     public float speed = 1;
     public Animator firstAnimator;
     public Animator copyAnimator;
-    private static readonly string HARD_CLOSE_DOOR = "hardCloseDoor";
+    public AudioSource hardCloseDoorAudioSource;
+    public AudioSource tryOpenLockedDoorAudioSource;
+    public ShadowStep shadow;
+    public Vector3 shadowPosition;
+    public Quaternion shadowRotation;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,8 +25,28 @@ public class DoorTeleport : MonoBehaviour
                 copyAnimator.SetFloat("Speed", speed);
                 copyAnimator.SetTrigger("OpenClose");
             }
-            FindObjectOfType<AudioManager>().PlayDelayed(HARD_CLOSE_DOOR, .9f / speed);
-            
+            if (hardCloseDoorAudioSource != null)
+            {
+                hardCloseDoorAudioSource.PlayDelayed(.9f / speed);
+            }
+            if(shadow != null)
+            {
+                StartCoroutine(StartShadowSteps());
+                StartCoroutine(StartToTryOpenLockedDoor());
+            }
         }
+    }
+
+    private IEnumerator StartShadowSteps()
+    {
+        shadow.PlaySteps();
+        shadow.MoveShadow(shadowPosition, shadowRotation);
+        yield return new WaitForSeconds(1.5f);
+        shadow.StopSteps();
+    }
+    private IEnumerator StartToTryOpenLockedDoor()
+    {
+        yield return new WaitForSeconds(1.8f);
+        tryOpenLockedDoorAudioSource.Play();
     }
 }
